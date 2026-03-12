@@ -1,0 +1,3977 @@
+<!-- Progress - Lavender Theme & Bar Chart -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Progress</title>
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#9381ff", // Lavender Primary
+              surface: "#f8fafc",
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="custom-layout">
+      body {
+        background-color: #f8fafc;
+        font-family: "Inter", sans-serif;
+      }
+      .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+      }
+      .progress-bar-inner {
+        transition: width 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-slate-800">
+    <!-- BEGIN: Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-8 h-8 bg-primary rounded-custom flex items-center justify-center text-white font-bold"
+            >
+              E
+            </div>
+            <span class="font-bold text-xl tracking-tight">EnglishFlow</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              class="text-slate-600 hover:text-primary transition-colors"
+              href="#"
+              >Courses</a
+            >
+            <a
+              class="text-primary font-semibold border-b-2 border-primary py-5"
+              href="#"
+              >My Progress</a
+            >
+            <a
+              class="text-slate-600 hover:text-primary transition-colors"
+              href="#"
+              >Community</a
+            >
+            <div
+              class="w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm overflow-hidden"
+            >
+              <img
+                alt="User profile"
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAza6BtM7h5ibQTvxzDNwBC8oPAm_fIR1R8o-a8nNqOVS7TJb5sforxuOkbDjxcm1BZuHTLQgFHrU3WJA_kBtiC9maQ10BiD4GHcep1BQUorbb5SlzuR0SC1GF63M8UnLj6wUy6R3E8fL-r0Yuc9TtNc_oVJt5a5R6lsBgZLujzS663Kwfk7vbptNRTsVrp1UyLa_glQ4xlNK8mLkHHDEr84_wRh7OR3W6CStt3fNSpSHbGzfKEjCx1vQTNksJchFY9U-W_1ezwsx4"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END: Navigation -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- BEGIN: Header Section -->
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold text-slate-900">
+          Your Learning Progress
+        </h1>
+        <p class="text-slate-500 mt-1">
+          Keep up the great work, Alex! You've reached 85% of your weekly goal.
+        </p>
+      </header>
+      <!-- END: Header Section -->
+      <!-- BEGIN: Top Stats Grid -->
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+        data-purpose="stats-summary"
+      >
+        <!-- Vocabulary Stat -->
+        <div
+          class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-sm font-medium text-slate-500 uppercase tracking-wider"
+              >Vocabulary</span
+            >
+            <svg
+              class="w-5 h-5 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </div>
+          <div class="text-2xl font-bold text-slate-900">1,284</div>
+          <div
+            class="text-xs font-medium text-emerald-600 mt-1 flex items-center"
+          >
+            <svg class="w-3 h-3 mr-1" fill="currentColor" viewbox="0 0 20 20">
+              <path
+                clip-rule="evenodd"
+                d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+            +42 this week
+          </div>
+        </div>
+        <!-- Hours Studied Stat -->
+        <div
+          class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-sm font-medium text-slate-500 uppercase tracking-wider"
+              >Hours Studied</span
+            >
+            <svg
+              class="w-5 h-5 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </div>
+          <div class="text-2xl font-bold text-slate-900">48.5 hrs</div>
+          <div
+            class="text-xs font-medium text-emerald-600 mt-1 flex items-center"
+          >
+            <svg class="w-3 h-3 mr-1" fill="currentColor" viewbox="0 0 20 20">
+              <path
+                clip-rule="evenodd"
+                d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+            +5.2 hrs since last week
+          </div>
+        </div>
+        <!-- Quiz Scores Stat -->
+        <div
+          class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-sm font-medium text-slate-500 uppercase tracking-wider"
+              >Avg. Quiz Score</span
+            >
+            <svg
+              class="w-5 h-5 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </div>
+          <div class="text-2xl font-bold text-slate-900">92%</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">
+            Consistent performance
+          </div>
+        </div>
+        <!-- Streak Stat -->
+        <div
+          class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-sm font-medium text-slate-500 uppercase tracking-wider"
+              >Current Streak</span
+            >
+            <svg
+              class="w-5 h-5 text-orange-500"
+              fill="currentColor"
+              viewbox="0 0 20 20"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.395 2.553a1 1 0 00-1.450 3.6c.36.71.528 1.52.528 2.347 0 2.928-2.347 5.347-5.347 5.347s-5.347-2.419-5.347-5.347c0-3.538 2.39-6.636 5.64-7.662a1 1 0 00-.774-1.933C2.143 1.43 0 5.451 0 9.87c0 5.448 4.418 9.87 9.87 9.87s9.87-4.422 9.87-9.87c0-2.33-.805-4.47-2.144-6.146a1 1 0 00-1.232-.321c-.459.244-.992.414-1.554.489a8.709 8.709 0 01-2.545-.319z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <div class="text-2xl font-bold text-slate-900">14 Days</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">Keep it up!</div>
+        </div>
+      </section>
+      <!-- END: Top Stats Grid -->
+      <!-- BEGIN: Detailed Analytics -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <!-- Vocabulary Progress Stacked Bar Chart -->
+        <div
+          class="lg:col-span-2 bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-bold text-lg text-slate-800">
+              Vocabulary Progress
+            </h3>
+            <select
+              class="text-sm border-slate-200 rounded-custom focus:ring-primary focus:border-primary"
+            >
+              <option>Last 30 Days</option>
+              <option>Last 6 Months</option>
+            </select>
+          </div>
+          <div class="chart-container">
+            <canvas
+              data-purpose="vocabulary-growth-canvas"
+              id="vocabChart"
+            ></canvas>
+          </div>
+          <div
+            class="mt-4 flex flex-wrap gap-4 text-xs font-medium text-slate-500"
+          >
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-sm bg-[#9381ff]"></span> New Words
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-sm bg-[#8ecae6]"></span> Already Knew
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-sm bg-[#e2e8f0]"></span> Reviewed
+            </div>
+          </div>
+        </div>
+        <!-- Quiz Scores Summary -->
+        <div
+          class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        >
+          <h3 class="font-bold text-lg text-slate-800 mb-6">
+            Recent Quiz Performance
+          </h3>
+          <div class="space-y-4">
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Business English Terminology</span>
+                <span class="text-primary font-bold">95%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div
+                  class="bg-primary h-full progress-bar-inner"
+                  style="width: 95%"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Irregular Verbs Masterclass</span>
+                <span class="text-primary font-bold">88%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div
+                  class="bg-primary h-full progress-bar-inner"
+                  style="width: 88%"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Listening Comprehension: Travel</span>
+                <span class="text-primary font-bold">100%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div
+                  class="bg-primary h-full progress-bar-inner"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Advanced Phrasal Verbs</span>
+                <span class="text-primary font-bold">76%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div
+                  class="bg-primary h-full progress-bar-inner"
+                  style="width: 76%"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="w-full mt-6 py-2 px-4 border border-slate-200 rounded-custom text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors"
+          >
+            View All Results
+          </button>
+        </div>
+      </div>
+      <!-- END: Detailed Analytics -->
+      <!-- BEGIN: Achievement Badges -->
+      <section
+        class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm"
+        data-purpose="achievements"
+      >
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h3 class="font-bold text-lg text-slate-800">
+              Unlocked Achievements
+            </h3>
+            <p class="text-sm text-slate-500">
+              You have earned 12 badges in total
+            </p>
+          </div>
+          <a class="text-primary text-sm font-semibold hover:underline" href="#"
+            >See all achievements</a
+          >
+        </div>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
+        >
+          <!-- Badge 1 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm ring-2 ring-blue-50"
+            >
+              <svg
+                class="w-8 h-8 text-blue-600"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">Early Bird</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >7 Days Early</span
+            >
+          </div>
+          <!-- Badge 2 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm ring-2 ring-purple-50"
+            >
+              <svg
+                class="w-8 h-8 text-purple-600"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">14 Day Streak</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >Persistence</span
+            >
+          </div>
+          <!-- Badge 3 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm ring-2 ring-emerald-50"
+            >
+              <svg
+                class="w-8 h-8 text-emerald-600"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">Quiz Master</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >Perfect Scores</span
+            >
+          </div>
+          <!-- Badge 4 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm ring-2 ring-amber-50"
+            >
+              <svg
+                class="w-8 h-8 text-amber-600"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+              >
+                <path
+                  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3.005 3.005 0 013.75-2.906z"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">Chatty Learner</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >Community Help</span
+            >
+          </div>
+          <!-- Badge 5 (Locked example) -->
+          <div class="flex flex-col items-center text-center opacity-40">
+            <div
+              class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm"
+            >
+              <svg
+                class="w-8 h-8 text-slate-400"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">Vocabulary 5k</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >Not Started</span
+            >
+          </div>
+          <!-- Badge 6 (Locked example) -->
+          <div class="flex flex-col items-center text-center opacity-40">
+            <div
+              class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 border-4 border-white shadow-sm"
+            >
+              <svg
+                class="w-8 h-8 text-slate-400"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-slate-700">Course Hero</span>
+            <span class="text-[10px] text-slate-400 mt-1 uppercase"
+              >Locked</span
+            >
+          </div>
+        </div>
+      </section>
+      <!-- END: Achievement Badges -->
+    </main>
+    <!-- BEGIN: Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white font-bold text-xs"
+            >
+              E
+            </div>
+            <span class="font-bold text-slate-800 tracking-tight"
+              >EnglishFlow</span
+            >
+          </div>
+          <div class="flex gap-8 text-sm text-slate-500">
+            <a class="hover:text-primary transition-colors" href="#"
+              >Help Center</a
+            >
+            <a class="hover:text-primary transition-colors" href="#"
+              >Privacy Policy</a
+            >
+            <a class="hover:text-primary transition-colors" href="#"
+              >Terms of Service</a
+            >
+          </div>
+          <p class="text-sm text-slate-400">
+            © 2023 EnglishFlow Learning Platform.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- END: Footer -->
+    <!-- BEGIN: Scripts -->
+    <script
+      data-purpose="external-charts-library"
+      src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+    <script data-purpose="chart-initialization">
+      document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("vocabChart").getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Oct 1", "Oct 7", "Oct 14", "Oct 21", "Oct 28", "Nov 4"],
+            datasets: [
+              {
+                label: "New Words",
+                data: [15, 20, 12, 18, 22, 25],
+                backgroundColor: "#9381ff", // Lavender
+                borderRadius: 4,
+              },
+              {
+                label: "Already Knew",
+                data: [25, 30, 22, 28, 32, 35],
+                backgroundColor: "#8ecae6", // Soft Blue/Teal
+                borderRadius: 4,
+              },
+              {
+                label: "Reviewed",
+                data: [60, 55, 66, 54, 46, 40],
+                backgroundColor: "#e2e8f0", // Light Grey/Purple (slate-200 ish)
+                borderRadius: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false, // Using custom legend for better design control
+              },
+            },
+            scales: {
+              x: {
+                stacked: true,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  color: "#94a3b8",
+                },
+              },
+              y: {
+                stacked: true,
+                grid: {
+                  color: "#f1f5f9",
+                },
+                ticks: {
+                  color: "#94a3b8",
+                },
+              },
+            },
+          },
+        });
+      });
+    </script>
+    <!-- END: Scripts -->
+  </body>
+</html>
+
+<!-- Auth - Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Auth</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#A78BFA",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="base-typography">
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-50 text-slate-900 min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <!-- BEGIN: AuthContainer -->
+    <main
+      class="sm:mx-auto sm:w-full sm:max-w-md"
+      data-purpose="auth-container"
+    >
+      <!-- BEGIN: HeaderSection -->
+      <header class="text-center mb-8">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-custom mb-4 shadow-lg shadow-primary/20"
+        >
+          <svg
+            class="h-8 w-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewbox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            ></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+          Welcome back!
+        </h1>
+        <p class="mt-2 text-sm text-gray-600">
+          Ready to continue your English journey?
+          <a
+            class="font-medium text-primary hover:text-violet-500 transition-colors"
+            href="#"
+            id="toggle-auth-mode"
+          >
+            Create a free account
+          </a>
+        </p>
+      </header>
+      <!-- END: HeaderSection -->
+      <!-- BEGIN: Card -->
+      <section
+        class="bg-white py-8 px-6 shadow-xl border border-gray-100 rounded-custom sm:px-10"
+        data-purpose="login-form-card"
+      >
+        <!-- BEGIN: SocialLogin -->
+        <div class="space-y-3">
+          <button
+            class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-custom bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            <svg class="w-5 h-5 mr-2" viewbox="0 0 24 24">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4"
+              ></path>
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853"
+              ></path>
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                fill="#FBBC05"
+              ></path>
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335"
+              ></path>
+            </svg>
+            Continue with Google
+          </button>
+          <button
+            class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-custom bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            <svg
+              class="w-5 h-5 mr-2 text-[#1877F2]"
+              fill="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              ></path>
+            </svg>
+            Continue with Facebook
+          </button>
+        </div>
+        <div class="mt-6 relative">
+          <div aria-hidden="true" class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span
+              class="px-2 bg-white text-gray-500 uppercase tracking-wider text-xs font-semibold"
+              >Or continue with email</span
+            >
+          </div>
+        </div>
+        <!-- END: SocialLogin -->
+        <!-- BEGIN: LoginForm -->
+        <form action="#" class="mt-6 space-y-5" id="auth-form" method="POST">
+          <div data-purpose="input-group">
+            <label
+              class="block text-sm font-medium text-gray-700 mb-1"
+              for="email"
+              >Email address</label
+            >
+            <input
+              autocomplete="email"
+              class="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-custom shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required=""
+              type="email"
+            />
+          </div>
+          <div data-purpose="input-group">
+            <label
+              class="block text-sm font-medium text-gray-700 mb-1"
+              for="password"
+              >Password</label
+            >
+            <input
+              autocomplete="current-password"
+              class="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-custom shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              required=""
+              type="password"
+            />
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+                class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded-sm"
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+              />
+              <label class="ml-2 block text-sm text-gray-700" for="remember-me"
+                >Remember me</label
+              >
+            </div>
+            <div class="text-sm">
+              <a class="font-medium text-primary hover:text-violet-500" href="#"
+                >Forgot password?</a
+              >
+            </div>
+          </div>
+          <div>
+            <button
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-custom shadow-sm text-sm font-bold text-white bg-primary hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all uppercase tracking-wide"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </div>
+        </form>
+        <!-- END: LoginForm -->
+      </section>
+      <!-- END: Card -->
+      <!-- BEGIN: FooterLinks -->
+      <footer class="mt-8 text-center text-xs text-gray-500">
+        <p>© 2023 English Platform. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+          <a class="hover:underline" href="#">Privacy Policy</a>
+          <a class="hover:underline" href="#">Terms of Service</a>
+          <a class="hover:underline" href="#">Help Center</a>
+        </div>
+      </footer>
+      <!-- END: FooterLinks -->
+    </main>
+    <!-- END: AuthContainer -->
+    <script data-purpose="ui-interactivity">
+      // Simple script to toggle between Login and Sign Up UI for demonstration
+      const toggleLink = document.getElementById("toggle-auth-mode");
+      const headerTitle = document.querySelector("header h1");
+      const headerSub = document.querySelector("header p");
+      const submitBtn = document.querySelector('button[type="submit"]');
+      const rememberMeSection = document.querySelector(
+        ".flex.items-center.justify-between",
+      );
+
+      let isLogin = true;
+
+      toggleLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        isLogin = !isLogin;
+
+        if (isLogin) {
+          headerTitle.textContent = "Welcome back!";
+          toggleLink.textContent = "Create a free account";
+          submitBtn.textContent = "Sign In";
+          rememberMeSection.style.display = "flex";
+          headerSub.firstChild.textContent =
+            "Ready to continue your English journey? ";
+        } else {
+          headerTitle.textContent = "Start Learning English";
+          toggleLink.textContent = "Sign in to your account";
+          submitBtn.textContent = "Create Account";
+          rememberMeSection.style.display = "none";
+          headerSub.firstChild.textContent =
+            "Join thousands of students today. ";
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- Dashboard - Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- BEGIN: Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: "#8b5cf6", // Lavender (Violet 500)
+                light: "#a78bfa", // Violet 400
+                dark: "#7c3aed", // Violet 600
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              theme: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- END: Tailwind Configuration -->
+    <style data-purpose="custom-styling">
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .rounded-theme {
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body class="text-slate-900">
+    <!-- BEGIN: MainLayout -->
+    <div class="flex min-h-screen">
+      <!-- BEGIN: SidebarNavigation -->
+      <aside
+        class="w-64 bg-white border-r border-slate-200 flex flex-col fixed h-full z-20"
+        data-purpose="sidebar"
+      >
+        <div class="p-6">
+          <div class="flex items-center gap-3 text-brand font-bold text-xl">
+            <div
+              class="w-8 h-8 bg-brand rounded-theme flex items-center justify-center text-white"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"
+                ></path>
+                <path
+                  d="M7.601 13.522l1.396.598 4.923-2.11V10.3l-5.183 2.22a1 1 0 01-.788 0L2.75 10.3v1.71l5.851 2.507z"
+                ></path>
+                <path
+                  d="M13 15.566l1.757.753a1 1 0 001.243-1.464l-1.625-2.03c.124-.06.242-.13.354-.208l2.364 1.013a3 3 0 01-1.912 5.606l-3.824-1.639V15.566z"
+                ></path>
+              </svg>
+            </div>
+            <span>LinguistAI</span>
+          </div>
+        </div>
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+          <a
+            class="flex items-center gap-3 px-4 py-3 bg-brand text-white rounded-theme font-medium transition-colors"
+            href="#"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            Dashboard
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-theme transition-colors"
+            href="#"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            Courses
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-theme transition-colors"
+            href="#"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            Library
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-theme transition-colors"
+            href="#"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            Schedule
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-theme transition-colors"
+            href="#"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            Progress
+          </a>
+        </nav>
+        <div class="mt-auto p-4 border-t border-slate-200">
+          <div class="flex items-center gap-3 p-2">
+            <img
+              alt="User Profile"
+              class="w-10 h-10 rounded-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhzyoXS6iuQfINv2d7CAlNmQ4aEp9mTJYwaRaccVfin8aicdFUlXdjPwOSHRnq-36IAQ25EI7V_ST0OCkF2sZy_355Jwp_4l6aEG4-5tisxtJAFyWia08fYDvP2JZ3GhTkTrOHm5AGokW7ClVtIW_HzTegII9Wn2JLpguj7iieMY9fz80oBKRQERr0KrzkvbpYxAz0qTVqcN1XLqSaygGHk6mzl-uXK0b8QfHWLvRpYbkZm9d9qaH7uX2DJ193sjDAxILkc1hFpdA"
+            />
+            <div>
+              <p class="text-sm font-semibold">Alex Johnson</p>
+              <p class="text-xs text-slate-500">Premium Member</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- END: SidebarNavigation -->
+      <!-- BEGIN: MainContent -->
+      <main class="flex-1 ml-64 p-8">
+        <!-- BEGIN: HeaderSection -->
+        <header class="flex justify-between items-center mb-8">
+          <div>
+            <h1 class="text-2xl font-bold">Welcome back, Alex! 👋</h1>
+            <p class="text-slate-500">
+              You're making great progress in your B2 Upper-Intermediate course.
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <!-- Notification Bell -->
+            <button
+              class="p-2 text-slate-400 hover:text-brand transition-colors bg-white rounded-theme border border-slate-200 shadow-sm"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <!-- END: HeaderSection -->
+        <!-- BEGIN: OverviewGrid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- BEGIN: CurrentCourseCard -->
+          <section
+            class="lg:col-span-2 bg-white p-6 rounded-theme shadow-sm border border-slate-100"
+            data-purpose="current-course"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span
+                  class="px-2 py-1 bg-brand/10 text-brand text-xs font-bold rounded uppercase tracking-wider"
+                  >Level B2</span
+                >
+                <h2 class="text-xl font-bold mt-2">
+                  English for Business &amp; Tech
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">
+                  Next up: Mastering the Art of Negotiation
+                </p>
+              </div>
+              <button
+                class="bg-brand hover:bg-brand-dark text-white px-6 py-2 rounded-theme font-medium transition-colors shadow-sm"
+              >
+                Continue Learning
+              </button>
+            </div>
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-medium">
+                <span>Overall Progress</span>
+                <span>68%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div
+                  class="bg-brand h-full rounded-full"
+                  style="width: 68%"
+                ></div>
+              </div>
+            </div>
+          </section>
+          <!-- END: CurrentCourseCard -->
+          <!-- BEGIN: DailyStreakCard -->
+          <section
+            class="bg-brand text-white p-6 rounded-theme shadow-lg flex flex-col justify-between"
+            data-purpose="daily-streak"
+          >
+            <div class="flex justify-between items-center">
+              <h3 class="font-semibold opacity-90">Daily Streak</h3>
+              <svg
+                class="h-6 w-6 text-yellow-400"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.334-.398-1.817a1 1 0 00-1.487-.876 7.998 7.998 0 00-4.391 7.703c.334 3.389 3.015 6.361 6.311 7.35a1 1 0 001.19-.39c.307-.475.393-1.053.297-1.593a1 1 0 00-1.886-.365 3.337 3.337 0 01-4.638-3.79c.39-1.056.801-2.018 1.112-2.358.045-.045.077-.07.091-.08l.012-.008c.014-.01.051-.034.116-.07.132-.07.31-.157.513-.254.402-.194.887-.413 1.391-.587A1 1 0 0014 9.995V7a1 1 0 01.553-.894l4-2a1 1 0 011.334 1.213 6.978 6.978 0 01-2.013 2.806 1 1 0 001.512 1.306 8.978 8.978 0 002.533-4.307 1 1 0 00-1.239-1.138l-3.135.627a1.015 1.015 0 01-.44.026l-1.566-.442c-.546-.153-1.026-.408-1.384-.68z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <span class="text-5xl font-bold">12</span>
+              <span class="text-xl ml-1 opacity-80">Days</span>
+            </div>
+            <div class="mt-4 flex gap-1">
+              <!-- Simplified weekday indicators -->
+              <div class="flex-1 h-1 bg-white opacity-40 rounded-full"></div>
+              <div class="flex-1 h-1 bg-white rounded-full"></div>
+              <div class="flex-1 h-1 bg-white rounded-full"></div>
+              <div class="flex-1 h-1 bg-white rounded-full"></div>
+              <div class="flex-1 h-1 bg-white rounded-full"></div>
+              <div class="flex-1 h-1 bg-white opacity-40 rounded-full"></div>
+              <div class="flex-1 h-1 bg-white opacity-40 rounded-full"></div>
+            </div>
+            <p class="text-xs mt-2 opacity-80">
+              5 days left to reach your goal!
+            </p>
+          </section>
+          <!-- END: DailyStreakCard -->
+        </div>
+        <!-- END: OverviewGrid -->
+        <!-- BEGIN: ContentSections -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- BEGIN: RecentLessons -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-bold">Recent Lessons</h3>
+              <a
+                class="text-brand text-sm font-semibold hover:underline"
+                href="#"
+                >View All</a
+              >
+            </div>
+            <div class="space-y-4">
+              <!-- Lesson 1 -->
+              <div
+                class="bg-white p-4 rounded-theme border border-slate-100 flex items-center justify-between group cursor-pointer hover:shadow-md transition-shadow"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 bg-violet-50 rounded-theme flex items-center justify-center text-brand"
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewbox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-semibold group-hover:text-brand transition-colors"
+                    >
+                      Speaking Practice: Corporate Idioms
+                    </h4>
+                    <p class="text-sm text-slate-500">
+                      Completed yesterday • 15 mins
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center text-green-500 font-bold">
+                  92%
+                </div>
+              </div>
+              <!-- Lesson 2 -->
+              <div
+                class="bg-white p-4 rounded-theme border border-slate-100 flex items-center justify-between group cursor-pointer hover:shadow-md transition-shadow"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 bg-purple-50 rounded-theme flex items-center justify-center text-purple-600"
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewbox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-semibold group-hover:text-brand transition-colors"
+                    >
+                      Grammar: Passive Voice in Reports
+                    </h4>
+                    <p class="text-sm text-slate-500">
+                      Completed Aug 15 • 25 mins
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center text-green-500 font-bold">
+                  88%
+                </div>
+              </div>
+              <!-- Lesson 3 -->
+              <div
+                class="bg-white p-4 rounded-theme border border-slate-100 flex items-center justify-between group cursor-pointer hover:shadow-md transition-shadow"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 bg-orange-50 rounded-theme flex items-center justify-center text-orange-600"
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewbox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-semibold group-hover:text-brand transition-colors"
+                    >
+                      Vocabulary: Tech Industry Terms
+                    </h4>
+                    <p class="text-sm text-slate-500">
+                      Completed Aug 14 • 10 mins
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center text-green-500 font-bold">
+                  100%
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: RecentLessons -->
+          <!-- BEGIN: RecommendedActivities -->
+          <div class="space-y-6" data-purpose="recommendations">
+            <h3 class="text-lg font-bold">Recommended for You</h3>
+            <div class="space-y-4">
+              <!-- Rec 1 -->
+              <div
+                class="bg-white p-5 rounded-theme border border-slate-100 shadow-sm"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div
+                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center"
+                  >
+                    🎧
+                  </div>
+                  <span class="text-sm font-semibold">Podcast</span>
+                </div>
+                <h4 class="font-bold">Fintech Trends 2024</h4>
+                <p class="text-sm text-slate-500 mt-1 mb-4">
+                  Improve your listening with authentic tech industry news.
+                </p>
+                <button
+                  class="w-full py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-theme font-medium text-sm transition-colors border border-slate-200"
+                >
+                  Start Listening
+                </button>
+              </div>
+              <!-- Rec 2 -->
+              <div
+                class="bg-white p-5 rounded-theme border border-slate-100 shadow-sm"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div
+                    class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center"
+                  >
+                    👥
+                  </div>
+                  <span class="text-sm font-semibold">Live Event</span>
+                </div>
+                <h4 class="font-bold">Networking Workshop</h4>
+                <p class="text-sm text-slate-500 mt-1 mb-4">
+                  Practice your pitch with other B2 level students.
+                </p>
+                <button
+                  class="w-full py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-theme font-medium text-sm transition-colors border border-slate-200"
+                >
+                  Book Spot (Free)
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- END: RecommendedActivities -->
+        </div>
+        <!-- END: ContentSections -->
+      </main>
+      <!-- END: MainContent -->
+    </div>
+    <!-- END: MainLayout -->
+  </body>
+</html>
+
+<!-- Lessons List - Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Lessons</title>
+    <!-- BEGIN: External Resources -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- END: External Resources -->
+    <!-- BEGIN: Tailwind Configuration -->
+    <script data-purpose="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "#8b5cf6", // Lavender (Violet 500)
+                dark: "#7c3aed", // Darker Lavender (Violet 600)
+                light: "#f5f3ff", // Very light Lavender (Violet 50)
+              },
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <!-- END: Tailwind Configuration -->
+    <style data-purpose="custom-layout">
+      body {
+        background-color: #f8fafc;
+        font-family: "Inter", sans-serif;
+      }
+      .status-badge-completed {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .status-badge-progress {
+        background-color: #f5f3ff; /* Lavender light */
+        color: #6d28d9; /* Lavender dark */
+      }
+      .status-badge-locked {
+        background-color: #f1f5f9;
+        color: #64748b;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- BEGIN: MainHeader -->
+    <header
+      class="bg-white border-b border-gray-200 sticky top-0 z-50"
+      data-purpose="main-navigation"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <!-- Logo and Branding -->
+          <div class="flex items-center gap-2">
+            <div
+              class="w-8 h-8 bg-primary rounded-custom flex items-center justify-center"
+            >
+              <span class="text-white font-bold">E</span>
+            </div>
+            <span class="text-xl font-bold text-gray-900">EngLearn</span>
+          </div>
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex space-x-8">
+            <a
+              class="text-gray-900 border-b-2 border-primary px-1 pt-1 text-sm font-medium"
+              href="#"
+              >Lessons</a
+            >
+            <a
+              class="text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium"
+              href="#"
+              >Exercises</a
+            >
+            <a
+              class="text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium"
+              href="#"
+              >Vocabulary</a
+            >
+            <a
+              class="text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium"
+              href="#"
+              >Progress</a
+            >
+          </nav>
+          <!-- Profile / Search -->
+          <div class="flex items-center gap-4">
+            <button class="p-2 text-gray-400 hover:text-gray-500">
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+            <div
+              class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden border border-gray-300"
+            >
+              <img
+                alt="User Profile"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA967vrL4F9M5wuO_jfwP9Z1U6O94Sq0Rkzd1aC-DDoCN4Pc0HlFnVMX8dW33NFvoxm9B_jYbN53AVENTvvUQl2ced1cOA7j7Ne7DyHVgwq7fCyqyurAXeedLH5fRYkl_JlnkxgSK99i8M4kFuHZRK8q3pM1TkNL15kbkQtvdJA-P_164hu6MZC9Ja2QMez5v7S0wJ7oHSWXuviygTmHiTuos7u_w6gbwAfa1dp_-sOtKmILBUcc30vPN9mJ1Kb234k2ReogdVEXYo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END: MainHeader -->
+    <!-- BEGIN: HeroSection -->
+    <section
+      class="bg-white border-b border-gray-200 py-8 lg:py-12"
+      data-purpose="hero-area"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          English Platform - Lessons
+        </h1>
+        <p class="mt-3 text-lg text-gray-500 max-w-2xl">
+          Master English from Beginner to Advanced with our interactive
+          curriculum. Track your progress and unlock new levels.
+        </p>
+      </div>
+    </section>
+    <!-- END: HeroSection -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- BEGIN: FiltersToolbar -->
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8"
+        data-purpose="filtering-controls"
+      >
+        <div class="flex flex-wrap gap-2">
+          <!-- Category Filter -->
+          <select
+            class="rounded-custom border-gray-300 text-sm focus:ring-primary focus:border-primary"
+          >
+            <option>All Categories</option>
+            <option>Grammar</option>
+            <option>Speaking</option>
+            <option>Writing</option>
+            <option>Business English</option>
+          </select>
+          <!-- Difficulty Filter -->
+          <select
+            class="rounded-custom border-gray-300 text-sm focus:ring-primary focus:border-primary"
+          >
+            <option>All Levels</option>
+            <option>Beginner (A1-A2)</option>
+            <option>Intermediate (B1-B2)</option>
+            <option>Advanced (C1-C2)</option>
+          </select>
+        </div>
+        <!-- Sorting -->
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-gray-500">Sort by:</span>
+          <select
+            class="rounded-custom border-gray-300 text-sm focus:ring-primary focus:border-primary"
+          >
+            <option>Latest</option>
+            <option>Progress</option>
+            <option>Difficulty</option>
+          </select>
+        </div>
+      </div>
+      <!-- END: FiltersToolbar -->
+      <!-- BEGIN: LessonsGrid -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        data-purpose="lessons-container"
+      >
+        <!-- Lesson Card: Completed -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuByZv4N21DRCSoWiVWy_a9D3XhdlZ0HeBr_g0oyabvdLNOqo6-8uJdusFOjiqTQGSKiY5u39SnHVMShXx9Tr096SKYUR0a8VxVgqO8PKDpL2iGlP4kk46DpB0ODRSjJoLIwHE5q2jhl3S1sHVhV9BsYC3A0yGUQxJ11ElQfiwFuXlZyO-JlNp5rwI_ZgdVZ--vhhbNwOoGTpdbetxHEXrxowC3ebnyHM6vyTEiZF4tH3yQm6dTtH3IwuwySncZ4nAAECaZEXcwozS8"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-completed"
+              >Completed</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-primary uppercase tracking-wider"
+              >Grammar</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Present Simple Tense
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Learn the basics of English verb conjugation in the present tense.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: A1</span>
+              <button
+                class="text-sm font-semibold text-primary hover:text-primary-dark"
+              >
+                Review Lesson
+              </button>
+            </div>
+          </div>
+        </article>
+        <!-- Lesson Card: In Progress -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCAusRYijYp2MWTL-HmcoEq7qNTcoVfWUGz9t4XgYzTOpdsO7ei2zxvSJOMYM7PySPaDK7qw8aUeUkYrTFWpff6HGYL3AhrtvP-Knrn_YhBzEhYFaSn4FyZS-50-F5pgymnV24YBHCIJ4VELRXuioVMchJz67cfn8szJPhpOq_98fXGUyBNuTT-dcc2RQqo1Ws7oQKFPMilAy9xSckoQmbknjKkXhlecm6-oy3ijJAC2sj4JX9Q65RRIJd6icWEfJkjr92ninCE5o"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-progress"
+              >In Progress (60%)</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-primary uppercase tracking-wider"
+              >Speaking</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Ordering at a Restaurant
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Practice common phrases and vocabulary for dining out.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: A2</span>
+              <button
+                class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-custom hover:bg-primary-dark transition-colors"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </article>
+        <!-- Lesson Card: Locked -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden opacity-75 relative"
+        >
+          <div
+            class="absolute inset-0 z-10 bg-gray-900/5 flex items-center justify-center"
+          >
+            <!-- Lock Icon overlay can go here if needed -->
+          </div>
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover grayscale"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvvjHykGXqr98PEwxf4mk-AbeS78RlnEyb8AvE8Gh_G13kDhE2ufPTZMH8-DPLzqfhXNKMBJmYzDEt_DdfSgHdnPgy6P-g1BA-MPdVlqeSNM0TQ_ZXNgzIh49qu9wB-uiUKGHhKP0v91Izmg3SlpE15_ldsGuoBMpr_pc62_Han14mbGVfI3c8_9qQt3aP3nK2wW1aJJxoszKBLKUhRXIdGKQP_YJl_VSKarTDfxMf6RY9N2kKgyVPP6vSGUAlfucqtXvtKqkZ-Ro"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-locked"
+              >Locked</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+              >Business</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Email Etiquette
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Formal vs informal communication in professional settings.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: B1</span>
+              <div class="flex items-center gap-1 text-gray-400">
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span class="text-xs">Locked</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Lesson Card: In Progress (Alternative) -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3U91ybxbsObs7Rf8fWeQCh_XVBdZ7BZL2DQBrep-FUztXYqoQby6lL8tPISVfeK2b8c8nCGAlBbq6mGnOR4gwItA4DL1gfAQbKK9jqk-6LpYQe9I2xBZ769QFfTrBbrfsUanGewI_UiutKptthCu5aNwDnC_K0lDStWDcCCFRIz3pByhcUFFXbVGtbIVl_nJp-oLNADKT6jqOd7_BzGJQ3cydB3PeaVtm7ZWeFxKd-JCKB_jKroKd5kDpUEyAE72dleAZQ38u0pc"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-progress"
+              >In Progress (15%)</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-primary uppercase tracking-wider"
+              >Vocabulary</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Traveling &amp; Transport
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Key terms for airports, train stations, and getting around.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: A2</span>
+              <button
+                class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-custom hover:bg-primary-dark transition-colors"
+              >
+                Resume
+              </button>
+            </div>
+          </div>
+        </article>
+        <!-- Lesson Card: Locked (Advanced) -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden opacity-75 relative"
+        >
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover grayscale"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdYU8VqNM3BtFqDf0h1pbAACsevNSO2G0gXbuFL3IwXXXanqZPyFq97mrwlyvHhUsJwGEd1wRX-ufHami-BZEa4Ezha561cWXaE8XqGgxdd4l1V49oLa9gytMO6InkpC6piom6I_Ddk_xNy0UbCmDtY4Njefse-P5zIBE3rFnHq_HRdho0ZC9gzmLFm9jJ3RYZgsC4Fn54dva_gh9_yEJ_QKsJ7LLg3VdW9EpJeuYIM8BtpfLKXSuBvSps0BfnQRiC0LFHrDlJqts"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-locked"
+              >Locked</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+              >Writing</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Advanced Essay Structure
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Organize complex arguments and use academic connectors.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: C1</span>
+              <div class="flex items-center gap-1 text-gray-400">
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <span class="text-xs">Locked</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Lesson Card: In Progress -->
+        <article
+          class="bg-white rounded-custom border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div class="relative h-40 bg-gray-200">
+            <img
+              alt="Lesson Thumbnail"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ZuP6NNfIkMd7S5546dO0xf4VlV8MgO7bfnEB02GPhoUlL85I2QLHQZtF-M_0_3eoNRwg9k5rpzKEnmiw1f7oW4ru5nf4m5PgI2YA0y1MaWDo2ezgr4WXWOI53ia8Bp4IRVqelRDw7mu0es_k4DbT2AciswqndFtdD5eJKDcTQxq2pWfLr5TberTogEvW9HyXliLUbZPbusoiBxTk2ovrwNIdJcc0sJoUAjLeSw9dckEeYZXVNyuQ5unYqvCiVMbW_aJMYzJNqvs"
+            />
+            <span
+              class="absolute top-3 right-3 px-2 py-1 rounded-custom text-xs font-semibold status-badge-progress"
+              >In Progress (85%)</span
+            >
+          </div>
+          <div class="p-4">
+            <span
+              class="text-xs font-semibold text-primary uppercase tracking-wider"
+              >Grammar</span
+            >
+            <h3 class="mt-1 text-lg font-bold text-gray-900">
+              Conditional Sentences
+            </h3>
+            <p class="mt-2 text-sm text-gray-500 line-clamp-2">
+              Master zero, first, second, and third conditionals.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xs text-gray-400 font-medium">Level: B2</span>
+              <button
+                class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-custom hover:bg-primary-dark transition-colors"
+              >
+                Resume
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- END: LessonsGrid -->
+      <!-- BEGIN: Pagination -->
+      <div
+        class="mt-12 flex items-center justify-center gap-2"
+        data-purpose="pagination-controls"
+      >
+        <button
+          class="p-2 border border-gray-300 rounded-custom hover:bg-gray-50"
+        >
+          <svg
+            class="h-5 w-5 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M15 19l-7-7 7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            ></path>
+          </svg>
+        </button>
+        <button
+          class="w-10 h-10 bg-primary text-white rounded-custom font-medium"
+        >
+          1
+        </button>
+        <button
+          class="w-10 h-10 border border-gray-300 text-gray-600 rounded-custom font-medium hover:bg-gray-50"
+        >
+          2
+        </button>
+        <button
+          class="w-10 h-10 border border-gray-300 text-gray-600 rounded-custom font-medium hover:bg-gray-50"
+        >
+          3
+        </button>
+        <button
+          class="p-2 border border-gray-300 rounded-custom hover:bg-gray-50"
+        >
+          <svg
+            class="h-5 w-5 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M9 5l7 7-7 7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <!-- END: Pagination -->
+    </main>
+    <!-- BEGIN: Footer -->
+    <footer
+      class="bg-white border-t border-gray-200 mt-16 py-8"
+      data-purpose="footer-section"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <div class="flex items-center gap-2">
+            <div
+              class="w-6 h-6 bg-primary rounded-custom flex items-center justify-center"
+            >
+              <span class="text-white text-[10px] font-bold">E</span>
+            </div>
+            <span class="text-sm font-semibold text-gray-500"
+              >© 2023 EngLearn English Platform.</span
+            >
+          </div>
+          <div class="flex gap-6">
+            <a class="text-sm text-gray-500 hover:text-primary" href="#"
+              >Support</a
+            >
+            <a class="text-sm text-gray-500 hover:text-primary" href="#"
+              >Privacy Policy</a
+            >
+            <a class="text-sm text-gray-500 hover:text-primary" href="#"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- END: Footer -->
+  </body>
+</html>
+
+<!-- Exercise - Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Exercise</title>
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8b5cf6", // Lavender / Violet 500
+              surface: "#f8fafc",
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="custom-layout">
+      body {
+        background-color: #f8fafc;
+        color: #1e293b;
+      }
+      .option-card:hover {
+        border-color: #8b5cf6;
+        background-color: #f5f3ff;
+      }
+      .option-card.selected {
+        border-color: #8b5cf6;
+        background-color: #8b5cf6;
+        color: white;
+      }
+      .progress-transition {
+        transition: width 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col font-sans">
+    <!-- BEGIN: Navigation Header -->
+    <header
+      class="bg-white border-b border-slate-200 px-6 py-4"
+      data-purpose="main-header"
+    >
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <!-- Close button to exit exercise -->
+          <button
+            aria-label="Exit exercise"
+            class="text-slate-400 hover:text-slate-600 p-2"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 18L18 6M6 6l12 12"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+          <h1 class="text-lg font-semibold text-slate-800">
+            English Platform - Exercise
+          </h1>
+        </div>
+        <!-- Progress Bar Container -->
+        <div class="flex-1 max-w-md mx-8" data-purpose="progress-section">
+          <div class="flex justify-between text-xs text-slate-500 mb-1">
+            <span>Progress</span>
+            <span>60%</span>
+          </div>
+          <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div
+              class="bg-primary h-full progress-transition rounded-full"
+              style="width: 60%"
+            ></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-medium text-slate-600">Level: B2</span>
+        </div>
+      </div>
+    </header>
+    <!-- END: Navigation Header -->
+    <!-- BEGIN: Main Content Area -->
+    <main class="flex-1 overflow-y-auto py-12 px-6">
+      <div class="max-w-2xl mx-auto">
+        <!-- Exercise Instruction Section -->
+        <section class="mb-10 text-center" data-purpose="exercise-instruction">
+          <span
+            class="inline-block px-3 py-1 bg-violet-50 text-primary text-xs font-bold uppercase tracking-wider rounded-full mb-4"
+            >Multiple Choice</span
+          >
+          <h2 class="text-2xl font-bold text-slate-900 mb-2">
+            Complete the sentence
+          </h2>
+          <p class="text-slate-600">
+            Choose the correct vocabulary word that fits the context of the
+            sentence below.
+          </p>
+        </section>
+        <!-- Question Content -->
+        <section
+          class="bg-white rounded-custom border border-slate-200 p-8 shadow-sm mb-8"
+          data-purpose="question-card"
+        >
+          <div class="mb-8">
+            <p class="text-xl leading-relaxed text-slate-800 text-center">
+              "The company's marketing strategy was so
+              <span
+                class="border-b-2 border-primary px-4 text-primary font-semibold"
+                >________</span
+              >
+              that it managed to capture 40% of the market share within six
+              months."
+            </p>
+          </div>
+          <!-- Options Grid -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            id="options-container"
+          >
+            <!-- Option A -->
+            <button
+              class="option-card flex items-center p-4 border-2 border-slate-200 rounded-custom transition-all group"
+              data-purpose="choice-item"
+            >
+              <span
+                class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center mr-4 group-hover:border-primary text-sm font-bold"
+                >A</span
+              >
+              <span class="font-medium">Tentative</span>
+            </button>
+            <!-- Option B -->
+            <button
+              class="option-card flex items-center p-4 border-2 border-slate-200 rounded-custom transition-all group"
+              data-purpose="choice-item"
+            >
+              <span
+                class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center mr-4 group-hover:border-primary text-sm font-bold"
+                >B</span
+              >
+              <span class="font-medium">Ambiguous</span>
+            </button>
+            <!-- Option C (Selected Example) -->
+            <button
+              class="option-card selected flex items-center p-4 border-2 border-primary rounded-custom transition-all group"
+              data-purpose="choice-item"
+            >
+              <span
+                class="w-8 h-8 rounded-full border border-white/30 bg-white/20 flex items-center justify-center mr-4 text-sm font-bold"
+                >C</span
+              >
+              <span class="font-medium text-white">Aggressive</span>
+            </button>
+            <!-- Option D -->
+            <button
+              class="option-card flex items-center p-4 border-2 border-slate-200 rounded-custom transition-all group"
+              data-purpose="choice-item"
+            >
+              <span
+                class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center mr-4 group-hover:border-primary text-sm font-bold"
+                >D</span
+              >
+              <span class="font-medium">Redundant</span>
+            </button>
+          </div>
+        </section>
+        <!-- Drag and Drop Mini-interaction (Bonus) -->
+        <section
+          class="bg-slate-100 rounded-custom border border-dashed border-slate-300 p-6 mb-8"
+          data-purpose="drag-drop-preview"
+        >
+          <p class="text-sm font-medium text-slate-500 mb-4 text-center">
+            Preview: Practice Synonyms (Drag the word to its pair)
+          </p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <div
+              class="bg-white px-4 py-2 rounded-custom shadow-sm border border-slate-200 cursor-move text-sm font-semibold"
+            >
+              Efficient
+            </div>
+            <div
+              class="bg-white px-4 py-2 rounded-custom shadow-sm border border-slate-200 cursor-move text-sm font-semibold"
+            >
+              Reliable
+            </div>
+            <div
+              class="bg-white px-4 py-2 rounded-custom shadow-sm border border-slate-200 cursor-move text-sm font-semibold"
+            >
+              Innovative
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- END: Main Content Area -->
+    <!-- BEGIN: Footer Controls -->
+    <footer
+      class="bg-white border-t border-slate-200 px-6 py-6"
+      data-purpose="footer-controls"
+    >
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <button
+          class="px-6 py-3 text-slate-600 font-semibold hover:bg-slate-50 rounded-custom transition-colors"
+        >
+          Skip Question
+        </button>
+        <div class="flex gap-4">
+          <!-- Hint Button -->
+          <button
+            class="flex items-center gap-2 px-6 py-3 text-primary font-semibold hover:bg-violet-50 rounded-custom transition-colors border border-primary/20"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="currentColor"
+              viewbox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.477.859h4z"
+              ></path>
+            </svg>
+            Get Hint
+          </button>
+          <!-- Main Action Button -->
+          <button
+            class="px-10 py-3 bg-primary text-white font-bold rounded-custom hover:bg-violet-700 shadow-lg shadow-violet-200 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Check Answer
+          </button>
+        </div>
+      </div>
+    </footer>
+    <!-- END: Footer Controls -->
+    <script data-purpose="ui-interactivity">
+      // Simple UI script to demonstrate selection
+      const options = document.querySelectorAll(".option-card");
+
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          // Clear all selections
+          options.forEach((opt) => {
+            opt.classList.remove(
+              "selected",
+              "bg-primary",
+              "border-primary",
+              "text-white",
+            );
+            opt.classList.add("border-slate-200");
+            // Reset internal indicator
+            const indicator = opt.querySelector("span:first-child");
+            indicator.classList.remove("border-white/30", "bg-white/20");
+            indicator.classList.add("border-slate-300");
+          });
+
+          // Apply selection to clicked
+          option.classList.add(
+            "selected",
+            "bg-primary",
+            "border-primary",
+            "text-white",
+          );
+          option.classList.remove("border-slate-200");
+          const indicator = option.querySelector("span:first-child");
+          indicator.classList.add("border-white/30", "bg-white/20");
+          indicator.classList.remove("border-slate-300");
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<!-- Profile - Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Profile</title>
+    <!-- Load Tailwind CSS v3 with plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Configure Tailwind with Custom Theme -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: "#8b5cf6", // Lavender/Violet 600
+                light: "#a78bfa", // Lavender 400
+                dark: "#7c3aed", // Lavender 700
+              },
+            },
+            borderRadius: {
+              custom: "8px", // ROUND_EIGHT
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <!-- BEGIN: Custom Styling -->
+    <style data-purpose="base-typography">
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb;
+      }
+    </style>
+    <style data-purpose="layout-adjustments">
+      .card-shadow {
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      }
+    </style>
+    <!-- END: Custom Styling -->
+  </head>
+  <body class="text-slate-900">
+    <!-- BEGIN: MainHeader -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <!-- Logo -->
+          <div class="flex items-center gap-2">
+            <div
+              class="w-8 h-8 bg-brand rounded-custom flex items-center justify-center text-white font-bold"
+            >
+              E
+            </div>
+            <span class="text-xl font-bold tracking-tight">EnglishPro</span>
+          </div>
+          <!-- Navigation -->
+          <nav
+            class="hidden md:flex space-x-8 text-sm font-medium text-slate-600"
+          >
+            <a class="hover:text-brand transition-colors" href="#">Dashboard</a>
+            <a class="hover:text-brand transition-colors" href="#">Courses</a>
+            <a class="hover:text-brand transition-colors" href="#">Community</a>
+            <a class="text-brand border-b-2 border-brand pb-5 mt-5" href="#"
+              >Profile</a
+            >
+          </nav>
+          <!-- User Info -->
+          <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-400 hover:text-slate-600">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+            <img
+              alt="Avatar"
+              class="w-10 h-10 rounded-full border border-slate-200"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ3e4VKPe3fg_YEzOMzqJwZlg6b184RSnYudsE6iXJ7WkraaS17cN0FQkt1QJ-0vSERfgFvDWS1UGPXu2AXKanIEdSrJ7N3eQRndizxo0tVHMvVNQxT1xeu6RI0SJjvhi6BSlpfxQGQgFSqSdSsiGX-2Rn2iYgBnAw3OyvrWA8JwEcUhmDcyk2USLxM1UKrA2INgpgIl_-SeQ_omT8zHu5LIzJQ791bLVUz28lexJVn0s6phwbH7wiUMi5HgKZasAcxE680dz8HmQ"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END: MainHeader -->
+    <!-- BEGIN: MainContent -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-x-12">
+        <!-- BEGIN: SidebarNav -->
+        <aside class="hidden lg:block lg:col-span-3">
+          <nav class="space-y-1">
+            <a
+              class="bg-brand/10 text-brand group flex items-center px-3 py-2 text-sm font-medium rounded-custom"
+              href="#account"
+            >
+              Account Settings
+            </a>
+            <a
+              class="text-slate-600 hover:bg-slate-50 hover:text-slate-900 group flex items-center px-3 py-2 text-sm font-medium rounded-custom"
+              href="#preferences"
+            >
+              Preferences
+            </a>
+            <a
+              class="text-slate-600 hover:bg-slate-50 hover:text-slate-900 group flex items-center px-3 py-2 text-sm font-medium rounded-custom"
+              href="#notifications"
+            >
+              Notifications
+            </a>
+            <a
+              class="text-slate-600 hover:bg-slate-50 hover:text-slate-900 group flex items-center px-3 py-2 text-sm font-medium rounded-custom"
+              href="#subscription"
+            >
+              Subscription
+            </a>
+          </nav>
+        </aside>
+        <!-- END: SidebarNav -->
+        <!-- BEGIN: ContentArea -->
+        <div class="space-y-8 lg:col-span-9">
+          <!-- Section: Account Profile -->
+          <section
+            class="bg-white rounded-custom border border-slate-200 card-shadow overflow-hidden"
+            data-purpose="account-settings-section"
+            id="account"
+          >
+            <div class="px-4 py-5 sm:px-6 border-b border-slate-200">
+              <h3 class="text-lg font-semibold leading-6 text-slate-900">
+                Personal Information
+              </h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Update your profile details and contact information.
+              </p>
+            </div>
+            <div class="px-4 py-6 sm:p-6 space-y-6">
+              <div class="flex items-center gap-6">
+                <div class="relative">
+                  <img
+                    alt="Profile picture"
+                    class="h-24 w-24 rounded-full object-cover border-2 border-slate-100"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6DyoFAIJDJtfKL1t1d5i_bEC5yDNPHyKMofMQWDqA5xj5zjx8G1_dncR2FJdooeN_ikshXxt3Wd5d0C2ajwCmPfEklwrp74vxw9N-eZWLLLyD8NduZ09A9IHqJRslRPoVOKT4Eehz3A5ABrSk6w-cLs_vw9s71zy0Xsol3XNVoi7EgVcBcPpVk22SxtFnQEhwC3OEzgvTgZIOkkkqlhloG_KCD20H0Vf-y2K4dnNoVJlGR7COqGzAQCAdpwEvQmX3QN32TK8RaV8"
+                  />
+                  <button
+                    class="absolute bottom-0 right-0 bg-white p-1.5 rounded-full border border-slate-200 shadow-sm hover:bg-slate-50"
+                  >
+                    <svg
+                      class="w-4 h-4 text-slate-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewbox="0 0 24 24"
+                    >
+                      <path
+                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      ></path>
+                      <path
+                        d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="flex-1 max-w-sm">
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Display Name</label
+                  >
+                  <input
+                    class="block w-full rounded-custom border-slate-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm"
+                    type="text"
+                    value="Alex Johnson"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Email Address</label
+                  >
+                  <input
+                    class="block w-full rounded-custom border-slate-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm"
+                    type="email"
+                    value="alex.j@example.com"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Phone Number</label
+                  >
+                  <input
+                    class="block w-full rounded-custom border-slate-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm"
+                    placeholder="+1 (555) 000-0000"
+                    type="tel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-slate-50 px-4 py-3 sm:px-6 text-right">
+              <button
+                class="inline-flex justify-center rounded-custom border border-transparent bg-brand py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 transition-colors"
+                type="submit"
+              >
+                Save Changes
+              </button>
+            </div>
+          </section>
+          <!-- Section: Language Preferences -->
+          <section
+            class="bg-white rounded-custom border border-slate-200 card-shadow overflow-hidden"
+            data-purpose="language-preferences-section"
+            id="preferences"
+          >
+            <div class="px-4 py-5 sm:px-6 border-b border-slate-200">
+              <h3 class="text-lg font-semibold leading-6 text-slate-900">
+                Language Preferences
+              </h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Tailor your learning experience.
+              </p>
+            </div>
+            <div class="px-4 py-6 sm:p-6 space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Native Language</label
+                  >
+                  <select
+                    class="block w-full rounded-custom border-slate-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm"
+                  >
+                    <option>Spanish</option>
+                    <option>French</option>
+                    <option>German</option>
+                    <option>Chinese</option>
+                    <option>Japanese</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Target Proficiency</label
+                  >
+                  <select
+                    class="block w-full rounded-custom border-slate-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm"
+                  >
+                    <option>Beginner (A1-A2)</option>
+                    <option selected="">Intermediate (B1-B2)</option>
+                    <option>Advanced (C1-C2)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Section: Notification Settings -->
+          <section
+            class="bg-white rounded-custom border border-slate-200 card-shadow overflow-hidden"
+            data-purpose="notification-settings-section"
+            id="notifications"
+          >
+            <div class="px-4 py-5 sm:px-6 border-b border-slate-200">
+              <h3 class="text-lg font-semibold leading-6 text-slate-900">
+                Notifications
+              </h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Decide how you'd like to stay informed.
+              </p>
+            </div>
+            <div class="px-4 py-6 sm:p-6">
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      checked=""
+                      class="h-4 w-4 rounded text-brand focus:ring-brand border-slate-300"
+                      id="notif-reminders"
+                      name="notif-reminders"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label
+                      class="font-medium text-slate-700"
+                      for="notif-reminders"
+                      >Study Reminders</label
+                    >
+                    <p class="text-slate-500">
+                      Get notified when it's time for your daily practice.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      checked=""
+                      class="h-4 w-4 rounded text-brand focus:ring-brand border-slate-300"
+                      id="notif-updates"
+                      name="notif-updates"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label
+                      class="font-medium text-slate-700"
+                      for="notif-updates"
+                      >Course Updates</label
+                    >
+                    <p class="text-slate-500">
+                      Stay informed about new lessons and platform features.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      class="h-4 w-4 rounded text-brand focus:ring-brand border-slate-300"
+                      id="notif-marketing"
+                      name="notif-marketing"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label
+                      class="font-medium text-slate-700"
+                      for="notif-marketing"
+                      >Marketing &amp; Offers</label
+                    >
+                    <p class="text-slate-500">
+                      Receive news about discounts and special events.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Section: Subscription Status -->
+          <section
+            class="bg-white rounded-custom border border-slate-200 card-shadow overflow-hidden"
+            data-purpose="subscription-status-section"
+            id="subscription"
+          >
+            <div class="px-4 py-5 sm:px-6 border-b border-slate-200">
+              <h3 class="text-lg font-semibold leading-6 text-slate-900">
+                Subscription &amp; Billing
+              </h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Manage your current plan and payment methods.
+              </p>
+            </div>
+            <div class="px-4 py-6 sm:p-6">
+              <div
+                class="bg-brand/5 border border-brand/20 rounded-custom p-4 flex flex-col md:flex-row md:items-center justify-between gap-4"
+              >
+                <div>
+                  <span
+                    class="inline-flex items-center rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-semibold text-brand"
+                    >PRO PLAN</span
+                  >
+                  <p class="mt-2 text-sm text-slate-700">
+                    Your next billing date is
+                    <span class="font-semibold">October 12, 2023</span> for
+                    <span class="font-semibold">$19.99</span>.
+                  </p>
+                </div>
+                <div class="flex gap-3">
+                  <button
+                    class="px-4 py-2 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-custom hover:bg-slate-50 transition-colors"
+                  >
+                    Manage Billing
+                  </button>
+                  <button
+                    class="px-4 py-2 text-sm font-medium text-white bg-brand rounded-custom hover:bg-brand-dark transition-colors"
+                  >
+                    Upgrade
+                  </button>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h4 class="text-sm font-medium text-slate-900 mb-4">
+                  Payment Method
+                </h4>
+                <div class="flex items-center gap-4 text-sm text-slate-600">
+                  <div
+                    class="w-12 h-8 bg-slate-100 rounded flex items-center justify-center font-bold text-slate-400 italic"
+                  >
+                    VISA
+                  </div>
+                  <span>•••• •••• •••• 4242</span>
+                  <button
+                    class="text-brand hover:underline font-medium ml-auto"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Section: Dangerous Actions -->
+          <div class="pt-6 border-t border-slate-200">
+            <button
+              class="text-sm font-medium text-red-600 hover:text-red-700 flex items-center gap-2"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+              Deactivate Account
+            </button>
+          </div>
+        </div>
+        <!-- END: ContentArea -->
+      </div>
+    </main>
+    <!-- END: MainContent -->
+    <!-- BEGIN: Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-20">
+      <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-sm text-slate-400">
+            © 2023 EnglishPro Learning Platform. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a class="text-sm text-slate-400 hover:text-slate-600" href="#"
+              >Privacy Policy</a
+            >
+            <a class="text-sm text-slate-400 hover:text-slate-600" href="#"
+              >Terms of Service</a
+            >
+            <a class="text-sm text-slate-400 hover:text-slate-600" href="#"
+              >Help Center</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- END: Footer -->
+  </body>
+</html>
+
+<!-- Lesson Detail - Theory & Interactive Exercises -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Lesson Detail</title>
+    <!-- Tailwind CSS v3 with plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Font Setup -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8b5cf6", // Lavender/Violet 600
+              "primary-dark": "#7c3aed", // Violet 700
+              "primary-light": "#ede9fe", // Violet 50
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="custom-styling">
+      body {
+        background-color: #f8fafc;
+        font-family: "Inter", sans-serif;
+      }
+      /* Custom scrollbar for sidebar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="text-slate-800">
+    <!-- BEGIN: Navigation -->
+    <nav
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 px-4 h-16 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-4">
+        <div class="bg-primary p-2 rounded-custom">
+          <svg
+            class="h-6 w-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewbox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            ></path>
+          </svg>
+        </div>
+        <span class="font-bold text-xl tracking-tight text-slate-900"
+          >LinguistFlow</span
+        >
+      </div>
+      <div class="flex items-center gap-6">
+        <div
+          class="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600"
+        >
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          Progress: 45%
+        </div>
+        <button
+          class="bg-primary text-white px-4 py-2 rounded-custom text-sm font-semibold hover:bg-primary-dark transition-colors"
+        >
+          Account
+        </button>
+      </div>
+    </nav>
+    <!-- END: Navigation -->
+    <!-- BEGIN: Main Layout -->
+    <main
+      class="max-w-[1440px] mx-auto flex flex-col lg:flex-row min-h-[calc(100vh-64px)]"
+    >
+      <!-- BEGIN: Lesson Content Area -->
+      <section
+        class="flex-1 p-4 lg:p-8 overflow-y-auto"
+        data-purpose="lesson-main-content"
+      >
+        <div class="max-w-4xl mx-auto">
+          <!-- Breadcrumbs -->
+          <nav aria-label="Breadcrumb" class="flex text-sm text-slate-500 mb-4">
+            <ol class="flex items-center space-x-2">
+              <li>Courses</li>
+              <li>
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 20 20">
+                  <path
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  ></path>
+                </svg>
+              </li>
+              <li>Intermediate English</li>
+              <li>
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 20 20">
+                  <path
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  ></path>
+                </svg>
+              </li>
+              <li class="text-primary font-medium">Business Idioms</li>
+            </ol>
+          </nav>
+          <h1 class="text-3xl font-bold text-slate-900 mb-6">
+            Mastering Business Idioms: Phase 1
+          </h1>
+          <!-- BEGIN: Theory Section -->
+          <div
+            class="bg-white rounded-custom border border-slate-200 shadow-sm overflow-hidden mb-12"
+            data-purpose="theory-section"
+          >
+            <div class="bg-primary p-4">
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                Comprehensive Theory: Business Idioms
+              </h2>
+            </div>
+            <div class="p-6 prose prose-slate max-w-none">
+              <p class="text-slate-600 mb-6 leading-relaxed">
+                Business idioms are expressions used frequently in professional
+                settings that often have a figurative meaning. Understanding
+                these is crucial for effective communication in meetings,
+                negotiations, and daily workplace interactions.
+              </p>
+              <h3 class="text-lg font-bold text-slate-800 mb-4">
+                Core Business Expressions
+              </h3>
+              <div class="overflow-x-auto mb-8">
+                <table
+                  class="min-w-full divide-y divide-slate-200 border border-slate-200 rounded-lg"
+                >
+                  <thead class="bg-slate-50">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider"
+                      >
+                        Idiom
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider"
+                      >
+                        Meaning
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider"
+                      >
+                        Context
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-slate-200">
+                    <tr>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary"
+                      >
+                        Ballpark figure
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-600">
+                        A rough estimate or approximate number.
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-500 italic">
+                        Budgeting &amp; Planning
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary"
+                      >
+                        Get the ball rolling
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-600">
+                        To set something in motion or make a start.
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-500 italic">
+                        Project Kickoff
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary"
+                      >
+                        Cut corners
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-600">
+                        To do something in the easiest or cheapest way.
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-500 italic">
+                        Quality Control
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary"
+                      >
+                        Back to the drawing board
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-600">
+                        Starting over because a previous attempt failed.
+                      </td>
+                      <td class="px-6 py-4 text-sm text-slate-500 italic">
+                        Problem Solving
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h4 class="font-bold text-slate-800 mb-2">Usage Guidelines</h4>
+              <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
+                <li>Use idioms sparingly to maintain professionalism.</li>
+                <li>
+                  Ensure the audience is familiar with the expression before
+                  using it in high-stakes negotiations.
+                </li>
+                <li>
+                  Focus on clarity; if an idiom might be misunderstood, use
+                  literal language instead.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- END: Theory Section -->
+          <!-- BEGIN: Practice Section -->
+          <div class="mb-12" data-purpose="practice-section">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-bold text-slate-900">
+                Interactive Practice
+              </h2>
+              <span class="text-sm font-medium text-slate-500"
+                >2 Exercises remaining</span
+              >
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Exercise 1: Cloze Test -->
+              <div
+                class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm flex flex-col h-full"
+              >
+                <div class="flex items-center gap-2 mb-4">
+                  <span
+                    class="bg-primary-light text-primary text-xs font-bold px-2 py-1 rounded uppercase"
+                    >Exercise 1</span
+                  >
+                  <h3 class="font-bold text-slate-800">Fill in the Blanks</h3>
+                </div>
+                <p class="text-slate-600 text-sm mb-6">
+                  Complete the sentence with the correct business idiom.
+                </p>
+                <div class="flex-1">
+                  <p class="text-lg leading-loose text-slate-700">
+                    "We need to
+                    <span
+                      class="border-b-2 border-primary/30 px-4 inline-block min-w-[150px] text-center italic text-primary"
+                      >_________</span
+                    >
+                    on the new marketing campaign before the end of the
+                    quarter."
+                  </p>
+                </div>
+                <div class="mt-8 flex gap-2">
+                  <input
+                    class="flex-1 border-slate-200 rounded-custom focus:ring-primary focus:border-primary text-sm"
+                    placeholder="Type your answer..."
+                    type="text"
+                  />
+                  <button
+                    class="bg-primary text-white px-4 py-2 rounded-custom text-sm font-bold hover:bg-primary-dark transition-colors"
+                  >
+                    Check
+                  </button>
+                </div>
+              </div>
+              <!-- Exercise 2: Sentence Unscrambling -->
+              <div
+                class="bg-white p-6 rounded-custom border border-slate-200 shadow-sm flex flex-col h-full"
+              >
+                <div class="flex items-center gap-2 mb-4">
+                  <span
+                    class="bg-primary-light text-primary text-xs font-bold px-2 py-1 rounded uppercase"
+                    >Exercise 2</span
+                  >
+                  <h3 class="font-bold text-slate-800">
+                    Sentence Unscrambling
+                  </h3>
+                </div>
+                <p class="text-slate-600 text-sm mb-6">
+                  Reorder the words to form a correct professional sentence.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    corners
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    We
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    cannot
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    safety
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    cut
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    on
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    afford
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-primary-light hover:border-primary transition-colors cursor-move"
+                  >
+                    to
+                  </button>
+                </div>
+                <div
+                  class="min-h-[60px] border-2 border-dashed border-slate-200 rounded-custom p-3 flex flex-wrap gap-2 items-center text-slate-400 text-sm"
+                >
+                  Drop words here to build sentence...
+                </div>
+                <div class="mt-6 flex justify-end">
+                  <button
+                    class="text-primary font-bold text-sm hover:underline"
+                  >
+                    Reset Order
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Practice Section -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- BEGIN: Vocabulary List -->
+            <div class="md:col-span-2" data-purpose="vocabulary-list">
+              <h2 class="text-xl font-bold mb-4">Related Key Vocabulary</h2>
+              <div class="space-y-4">
+                <!-- Vocab Item 1 -->
+                <div
+                  class="bg-white p-4 rounded-custom border border-slate-200 shadow-sm"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg font-bold text-primary"
+                      >Ballpark figure</span
+                    >
+                    <span
+                      class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600"
+                      >Idiom</span
+                    >
+                  </div>
+                  <p class="text-slate-600 text-sm mb-2">
+                    A rough estimate or an approximate number.
+                  </p>
+                  <p class="text-sm italic text-slate-400">
+                    "Could you give me a ballpark figure for the project cost?"
+                  </p>
+                </div>
+                <!-- Vocab Item 2 -->
+                <div
+                  class="bg-white p-4 rounded-custom border border-slate-200 shadow-sm"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg font-bold text-primary"
+                      >Get the ball rolling</span
+                    >
+                    <span
+                      class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600"
+                      >Idiom</span
+                    >
+                  </div>
+                  <p class="text-slate-600 text-sm mb-2">
+                    To set something in motion or make a start.
+                  </p>
+                  <p class="text-sm italic text-slate-400">
+                    "Let's get the ball rolling by discussing the budget."
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- END: Vocabulary List -->
+            <!-- BEGIN: Notes Section -->
+            <aside class="md:col-span-1" data-purpose="user-notes">
+              <div
+                class="bg-yellow-50 p-6 rounded-custom border border-yellow-100 sticky top-24"
+              >
+                <h2
+                  class="text-lg font-bold text-yellow-800 mb-4 flex items-center gap-2"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                  My Notes
+                </h2>
+                <textarea
+                  class="w-full h-40 bg-transparent border-none focus:ring-0 text-sm text-yellow-900 placeholder-yellow-600/50 resize-none"
+                  placeholder="Type your personal notes here..."
+                ></textarea>
+                <div
+                  class="mt-4 pt-4 border-t border-yellow-200 flex justify-between items-center"
+                >
+                  <span class="text-[10px] uppercase font-bold text-yellow-700"
+                    >Auto-saved</span
+                  >
+                  <button
+                    class="text-xs font-bold text-yellow-800 hover:underline"
+                  >
+                    Clear all
+                  </button>
+                </div>
+              </div>
+            </aside>
+            <!-- END: Notes Section -->
+          </div>
+          <!-- Footer Pagination -->
+          <div
+            class="mt-12 pt-8 border-t border-slate-200 flex justify-between items-center pb-8"
+          >
+            <button
+              class="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-primary transition-colors"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M15 19l-7-7 7-7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+              Previous Lesson
+            </button>
+            <button
+              class="bg-primary text-white px-6 py-3 rounded-custom font-bold hover:bg-primary-dark transition-all flex items-center gap-2 shadow-md"
+            >
+              Complete &amp; Next
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M9 5l7 7-7 7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- END: Lesson Content Area -->
+      <!-- BEGIN: Lesson Outline Sidebar -->
+      <aside
+        class="w-full lg:w-80 bg-white border-l border-slate-200 flex flex-col"
+        data-purpose="course-sidebar"
+      >
+        <div class="p-6 border-b border-slate-200">
+          <h3 class="font-bold text-lg text-slate-900">Course Content</h3>
+          <p
+            class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold"
+          >
+            12 Lessons • 3h 45m
+          </p>
+        </div>
+        <div class="flex-1 overflow-y-auto custom-scrollbar">
+          <!-- Module 1 -->
+          <div class="py-2">
+            <div
+              class="px-6 py-3 bg-slate-50 font-bold text-xs text-slate-400 uppercase tracking-widest"
+            >
+              Module 1: Professional Communication
+            </div>
+            <!-- Lesson Item: Completed -->
+            <div
+              class="px-6 py-4 flex items-start gap-3 border-l-4 border-green-500 bg-green-50/30 cursor-pointer"
+            >
+              <div class="mt-1 bg-green-500 rounded-full p-1">
+                <svg
+                  class="h-3 w-3 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M5 13l4 4L19 7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-700">
+                  Course Introduction
+                </p>
+                <p class="text-xs text-slate-400">Video • 05:20</p>
+              </div>
+            </div>
+            <!-- Lesson Item: Active -->
+            <div
+              class="px-6 py-4 flex items-start gap-3 border-l-4 border-primary bg-primary-light cursor-pointer"
+            >
+              <div class="mt-1 text-primary">
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                  <path
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-primary">
+                  Business Idioms: Phase 1
+                </p>
+                <p class="text-xs text-primary/70">Theory &amp; Practice</p>
+              </div>
+            </div>
+            <!-- Lesson Item: Upcoming -->
+            <div
+              class="px-6 py-4 flex items-start gap-3 border-l-4 border-transparent hover:bg-slate-50 cursor-pointer group transition-colors"
+            >
+              <div class="mt-1 text-slate-300 group-hover:text-slate-400">
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-slate-600">
+                  Vocabulary Quiz: Module 1
+                </p>
+                <p class="text-xs text-slate-400">Quiz • 10 Questions</p>
+              </div>
+            </div>
+          </div>
+          <!-- Module 2 -->
+          <div class="py-2">
+            <div
+              class="px-6 py-3 bg-slate-50 font-bold text-xs text-slate-400 uppercase tracking-widest"
+            >
+              Module 2: Advanced Grammar
+            </div>
+            <!-- Locked Item -->
+            <div class="px-6 py-4 flex items-start gap-3 opacity-60">
+              <div class="mt-1 text-slate-400">
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Conditional Tenses in Business
+                </p>
+                <p class="text-xs text-slate-400">Video • 15:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Sidebar Footer Help -->
+        <div class="p-6 bg-slate-50 border-t border-slate-200">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center"
+            >
+              <svg
+                class="h-6 w-6 text-slate-500"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-700">Need help?</p>
+              <p
+                class="text-xs text-slate-500 hover:text-primary cursor-pointer transition-colors"
+              >
+                Contact Support
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- END: Lesson Outline Sidebar -->
+    </main>
+    <!-- END: Main Layout -->
+  </body>
+</html>
+
+<!-- Home - Featured Topics Lavender Theme -->
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>English Platform - Home</title>
+    <!-- Google Font: Lexend -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration for Theme Customization -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#a689fa",
+              surface: "#ffffff",
+              background: "#f8fafc",
+            },
+            fontFamily: {
+              sans: ["Lexend", "sans-serif"],
+            },
+            borderRadius: {
+              custom: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style data-purpose="global-styles">
+      body {
+        font-family: "Lexend", sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+      }
+      .rounded-theme {
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- BEGIN: Navigation -->
+    <nav
+      class="bg-white border-b border-gray-100 sticky top-0 z-50"
+      data-purpose="main-navigation"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center">
+            <span class="text-2xl font-extrabold text-primary tracking-tight"
+              >ENG-LISH</span
+            >
+          </div>
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex space-x-8 items-center">
+            <a
+              class="text-gray-600 hover:text-primary font-medium transition"
+              href="#"
+              >Home</a
+            >
+            <a
+              class="text-gray-600 hover:text-primary font-medium transition"
+              href="#courses"
+              >Lessons</a
+            >
+            <a
+              class="text-gray-600 hover:text-primary font-medium transition"
+              href="#features"
+              >Methodology</a
+            >
+            <a
+              class="text-gray-600 hover:text-primary font-medium transition"
+              href="#testimonials"
+              >Reviews</a
+            >
+            <button
+              class="bg-primary text-white px-6 py-2 rounded-theme font-semibold hover:bg-opacity-90 transition shadow-sm"
+            >
+              Get Started
+            </button>
+          </div>
+          <!-- Mobile Toggle (Simplified) -->
+          <div class="md:hidden flex items-center">
+            <button class="text-gray-600">
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M4 6h16M4 12h16m-7 6h7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END: Navigation -->
+    <main>
+      <!-- BEGIN: Hero Section -->
+      <section
+        class="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-32"
+        data-purpose="hero-banner"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+            <div
+              class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left"
+            >
+              <h1
+                class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl"
+              >
+                <span class="block">Master English</span>
+                <span class="block text-primary">With Confidence</span>
+              </h1>
+              <p
+                class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl"
+              >
+                Join over 50,000 students learning English through our
+                interactive platform. Speak fluently, pass exams, and open doors
+                to global opportunities.
+              </p>
+              <div
+                class="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0"
+              >
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <button
+                    class="w-full sm:w-auto px-8 py-4 border border-transparent text-base font-semibold rounded-theme text-white bg-primary hover:bg-opacity-90 md:text-lg transition shadow-md"
+                  >
+                    Start Your Journey
+                  </button>
+                  <button
+                    class="w-full sm:w-auto px-8 py-4 border border-gray-300 text-base font-semibold rounded-theme text-gray-700 bg-white hover:bg-gray-50 md:text-lg transition"
+                  >
+                    Watch Demo
+                  </button>
+                </div>
+                <p class="mt-4 text-sm text-gray-400">
+                  No credit card required for 7-day trial.
+                </p>
+              </div>
+            </div>
+            <!-- Hero Image -->
+            <div
+              class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center"
+            >
+              <div
+                class="relative mx-auto w-full rounded-theme shadow-2xl overflow-hidden"
+              >
+                <img
+                  alt="Happy student using the English platform"
+                  class="w-full h-full object-cover"
+                  data-purpose="hero-image"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5s9TcdgB5bwL3RXm3xA_ur_OYgTkPvHQanLBOl2nVN7HjtsAOm44AvpTMNv7fjENAU7IUNX5t3lwiL-zLlGAPbNujMXRCKcq6ygshjgAnXoG3pfnAMJOoqIVKU5giobjNXHLyYHRbLVRr0uowSfKPuTNM-Adr1qGA2e689epiWAJcusuMlA6o78nx1ebfn8-J2E6CNpr_DZj87ytCR8lrFd9oKU1fb2bTgH0iB3A6YWpuzV9xxuawMBRIYKIhT0uu9bQrrhZAC1g"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: Hero Section -->
+      <!-- BEGIN: Features Section -->
+      <section
+        class="py-20 bg-white"
+        data-purpose="features-grid"
+        id="features"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <h2
+              class="text-base font-semibold text-primary tracking-wide uppercase"
+            >
+              Why Choose Us
+            </h2>
+            <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              A better way to learn English
+            </p>
+          </div>
+          <div class="mt-16">
+            <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+              <!-- Feature 1 -->
+              <div
+                class="flex flex-col items-center text-center p-6 rounded-theme hover:bg-slate-50 transition"
+              >
+                <div
+                  class="flex items-center justify-center h-16 w-16 rounded-theme bg-primary text-white mb-6"
+                >
+                  <svg
+                    class="h-8 w-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Live Speaking Practice
+                </h3>
+                <p class="mt-4 text-gray-500">
+                  Practice with native speakers and peers in moderated 24/7
+                  conversation rooms.
+                </p>
+              </div>
+              <!-- Feature 2 -->
+              <div
+                class="flex flex-col items-center text-center p-6 rounded-theme hover:bg-slate-50 transition"
+              >
+                <div
+                  class="flex items-center justify-center h-16 w-16 rounded-theme bg-primary text-white mb-6"
+                >
+                  <svg
+                    class="h-8 w-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">
+                  AI-Powered Feedback
+                </h3>
+                <p class="mt-4 text-gray-500">
+                  Get instant corrections on your pronunciation and grammar
+                  using advanced AI technology.
+                </p>
+              </div>
+              <!-- Feature 3 -->
+              <div
+                class="flex flex-col items-center text-center p-6 rounded-theme hover:bg-slate-50 transition"
+              >
+                <div
+                  class="flex items-center justify-center h-16 w-16 rounded-theme bg-primary text-white mb-6"
+                >
+                  <svg
+                    class="h-8 w-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">
+                  Custom Curriculum
+                </h3>
+                <p class="mt-4 text-gray-500">
+                  Learning paths tailored to your goals, whether it's Business,
+                  Travel, or Academic English.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: Features Section -->
+      <!-- BEGIN: Popular Learning Topics -->
+      <section
+        class="py-20 bg-background"
+        data-purpose="learning-topics"
+        id="courses"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+          >
+            <div class="max-w-2xl">
+              <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                Popular Learning Topics
+              </h2>
+              <p class="mt-4 text-lg text-gray-500">
+                Explore featured lessons and deep dives into the most essential
+                English skills.
+              </p>
+            </div>
+            <a
+              class="mt-6 md:mt-0 text-primary font-bold flex items-center hover:underline"
+              href="#"
+            >
+              Explore All Lessons
+              <svg
+                class="ml-2 w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Topic Card 1 -->
+            <div
+              class="bg-white rounded-theme overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition"
+            >
+              <img
+                alt="Business English Communication"
+                class="w-full h-48 object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzNJpLhYBZRegBzJZ31DYLaGTq8d7RK0KNqn2Or8vwe_dNSLldzAHrRvNsJUjMhOJ63E80wcDQoQl91dFQiGGe7ed8U-duD4fw91DSq2slvkDd-4zhXeq000uQJCKou_spk5Dxk6ZNXd4h1SE4hY9AzGG-afsEa7bAr5dtCICfaMKdrrl5qO_pwhmdIlvPSvHn14oigobZrMFLIDVDI8KAJExucKPVMF4EK89yFj_zEN91h0Y3g1L9ovG9DOkA2Cjviw22Cbp31Y4"
+              />
+              <div class="p-6 flex-grow flex flex-col">
+                <div
+                  class="flex items-center space-x-2 text-sm text-primary font-semibold mb-2"
+                >
+                  <span class="px-2 py-0.5 bg-purple-50 rounded-full"
+                    >Intermediate</span
+                  >
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-2">
+                  Professional Networking
+                </h4>
+                <p class="text-gray-500 text-sm mb-6">
+                  Learn how to introduce yourself, make small talk, and build
+                  professional connections in English-speaking environments.
+                </p>
+                <div class="mt-auto">
+                  <button
+                    class="w-full bg-primary text-white py-2 rounded-theme font-semibold hover:bg-opacity-90 transition shadow-sm"
+                  >
+                    Start Learning
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Topic Card 2 -->
+            <div
+              class="bg-white rounded-theme overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition"
+            >
+              <img
+                alt="Advanced Grammar Mastery"
+                class="w-full h-48 object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7TbXvk_Y7vYzi114QFLu8ZABsPVKZhlzLwvSpAHUlH0OuNoBfS_sqomALhkYjc1ygvmGi239c0MSFOWorHaTBaB-p_2Ymfc8RFcXXeegepf2c1dzj3DW9BOdZkTq_E5fIrVeAvOy5t6Dd5w5fvKy_kY6IJkwbTfBVk8tGx8XxVwMnwC6EoiUm30tyc328piAYw4-zVKe-6WO8oX9MwjkD-gH9amsiJIBJDa0LSt--3YgDIAEWHAxNXZnxrqqqw2y0QD5Ain4CfM"
+              />
+              <div class="p-6 flex-grow flex flex-col">
+                <div
+                  class="flex items-center space-x-2 text-sm text-primary font-semibold mb-2"
+                >
+                  <span class="px-2 py-0.5 bg-purple-50 rounded-full"
+                    >Advanced</span
+                  >
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-2">
+                  Complex Sentence Structures
+                </h4>
+                <p class="text-gray-500 text-sm mb-6">
+                  Master the use of relative clauses, conditionals, and passive
+                  voice to express complex ideas with clarity and precision.
+                </p>
+                <div class="mt-auto">
+                  <button
+                    class="w-full bg-primary text-white py-2 rounded-theme font-semibold hover:bg-opacity-90 transition shadow-sm"
+                  >
+                    Start Learning
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Topic Card 3 -->
+            <div
+              class="bg-white rounded-theme overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition"
+            >
+              <img
+                alt="Everyday English Vocabulary"
+                class="w-full h-48 object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvefskRPOlALmCrR_6auuUPcM4ca_sCEkmk7FwY6seieiEILUMWHAFclZyzzZAj7u3pUfZnOKEL2OWqBD8RGyjaVREJQNWHQQjQ42xJB3PSrZuoLD46g6kGpB_kQHFIjGaQmpEoaovn62NLTNoSuaoOeWy5ktdsFjTcDFFbRaJ6ct-8mJXIoLKbkfhwmsmGcsQvWWJFn8HSI0j0MNKZCC8Qm39IfyzEiFV_DlAiVaYV1MWVMb0q5POJoEje7U4ACyTJEpCLqPoHmU"
+              />
+              <div class="p-6 flex-grow flex flex-col">
+                <div
+                  class="flex items-center space-x-2 text-sm text-primary font-semibold mb-2"
+                >
+                  <span class="px-2 py-0.5 bg-purple-50 rounded-full"
+                    >Beginner</span
+                  >
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-2">
+                  Daily Routine Vocabulary
+                </h4>
+                <p class="text-gray-500 text-sm mb-6">
+                  Build a strong foundation by learning common verbs and nouns
+                  used to describe your day-to-day activities and chores.
+                </p>
+                <div class="mt-auto">
+                  <button
+                    class="w-full bg-primary text-white py-2 rounded-theme font-semibold hover:bg-opacity-90 transition shadow-sm"
+                  >
+                    Start Learning
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: Popular Learning Topics -->
+      <!-- BEGIN: Testimonials Section -->
+      <section
+        class="py-20 bg-white"
+        data-purpose="user-reviews"
+        id="testimonials"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-extrabold text-gray-900">
+              Loved by Students Worldwide
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="p-8 bg-slate-50 rounded-theme border border-gray-100">
+              <div class="flex items-center mb-4">
+                <div
+                  class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-300 overflow-hidden"
+                >
+                  <img
+                    alt="Avatar"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDApeR2jdbMgI3dJKfnqIhovn9i0qcNwO-7cmUDgwL9x11zFsX4NyQ5IZ4lQN7CAXM24EiIMhCYGPdHSX_nuqpSV5964He1k7oUR_FxVSKrISiaOrtai6IdD0c-lGx8EV_dXhd-f4KuLjcZsVWsIoO6-icYgcVfObCfu21zuE7AhgyizLUL9_hG26Zo8hd8j97TRVp9hDvG0-s4R4nEeNwLr7mK1FEF846YiuzRsQryLRfN9UKmLlpMkokXQlWEOrV44awhPGTBcms"
+                  />
+                </div>
+                <div class="ml-4">
+                  <div class="text-lg font-bold text-gray-900">
+                    Elena Rodriquez
+                  </div>
+                  <div class="text-primary text-sm">Brazil</div>
+                </div>
+              </div>
+              <p class="text-gray-600 italic">
+                "The live speaking sessions completely changed my confidence. I
+                went from being afraid to speak to leading meetings at my tech
+                job in just 3 months!"
+              </p>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="p-8 bg-slate-50 rounded-theme border border-gray-100">
+              <div class="flex items-center mb-4">
+                <div
+                  class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-300 overflow-hidden"
+                >
+                  <img
+                    alt="Avatar"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHvAdvDdowZfnDePblze7dBNZL77OQu5N9nyf9yfGDHHFz8PYxXuXWyIUIjeL4wLn4ZgtJ82pscITlf2y14EP06arp0v_WyvPNcm-oLOpljqkt778LKpUfXLATwwn9uK868OhzMsH_uetzioFv3xVpXmdFkOq452o4sGC_HlX3NLUCOLNkXwl1bcZSBr3xuRbd-f7zYe36ly-rz-BnKn9xt63Xed7FatWUn-JAX1Zz3qXAj5T8VFw8cxjsuXG8a84sBtqx3gYJU5I"
+                  />
+                </div>
+                <div class="ml-4">
+                  <div class="text-lg font-bold text-gray-900">
+                    Kenji Tanaka
+                  </div>
+                  <div class="text-primary text-sm">Japan</div>
+                </div>
+              </div>
+              <p class="text-gray-600 italic">
+                "I've tried many apps, but the personal curriculum here is
+                different. It focuses on what I actually need for my IELTS exam.
+                Highly recommended."
+              </p>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="p-8 bg-slate-50 rounded-theme border border-gray-100">
+              <div class="flex items-center mb-4">
+                <div
+                  class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-300 overflow-hidden"
+                >
+                  <img
+                    alt="Avatar"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs6Yw9o3TLoiRM34nf74ORB5M9eZLLQsAUKRTezsUFaOT1xqR5U0xMjUXI0kjQtGwuiEA-nZ2XiCSBX1pwZzsH3C1_StFb2SVwpGyz03lOKGfY7A9Exf3KfMlSEZ7qj5IA1o-oYT33XSY3PiJx4FpZQX5JrRPq3rJTvDVkHWsdOGfxJPDSaw1L-etYQACWf4_m0r6H1InPvTzVsS7oOmvIJQu8hp9wBawIuS-c81OpC8cl-Dz-leYu2aYN8hHb7bt1QVP7zwoFjyY"
+                  />
+                </div>
+                <div class="ml-4">
+                  <div class="text-lg font-bold text-gray-900">Sarah Chen</div>
+                  <div class="text-primary text-sm">Singapore</div>
+                </div>
+              </div>
+              <p class="text-gray-600 italic">
+                "The AI feedback on pronunciation is incredibly accurate. It's
+                like having a private tutor available 24 hours a day to correct
+                my mistakes."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: Testimonials Section -->
+      <!-- BEGIN: Final Call to Action -->
+      <section class="py-16 bg-primary" data-purpose="final-cta">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+          <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+            Ready to achieve your English goals?
+          </h2>
+          <p class="text-xl text-purple-50 mb-10">
+            Join thousands of learners and start your journey today. Your first
+            lesson is on us!
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              class="px-8 py-4 bg-white text-primary font-bold rounded-theme hover:bg-gray-100 transition shadow-lg text-lg"
+            >
+              Join for Free Now
+            </button>
+            <button
+              class="px-8 py-4 border-2 border-white text-white font-bold rounded-theme hover:bg-white hover:text-primary transition text-lg"
+            >
+              Explore All Lessons
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- END: Final Call to Action -->
+    </main>
+    <!-- BEGIN: Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12" data-purpose="main-footer">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="col-span-2 md:col-span-1">
+            <span
+              class="text-2xl font-extrabold text-white tracking-tight mb-4 block"
+              >ENG-LISH</span
+            >
+            <p class="text-sm">
+              Empowering students globally to achieve English fluency through
+              modern technology and expert teaching.
+            </p>
+          </div>
+          <div>
+            <h5
+              class="text-white font-bold mb-4 uppercase text-xs tracking-widest"
+            >
+              Platform
+            </h5>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a class="hover:text-primary transition" href="#">Lessons</a>
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Live Classes</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#">Curriculum</a>
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >App Download</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h5
+              class="text-white font-bold mb-4 uppercase text-xs tracking-widest"
+            >
+              Resources
+            </h5>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Grammar Guide</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Vocabulary Hub</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#">Blog</a>
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Free Placement Test</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h5
+              class="text-white font-bold mb-4 uppercase text-xs tracking-widest"
+            >
+              Support
+            </h5>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition" href="#">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-gray-800 text-center text-sm">
+          <p>© 2023 English Platform. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- END: Footer -->
+  </body>
+</html>

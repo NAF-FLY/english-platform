@@ -1,5 +1,7 @@
 import 'server-only'
 
+import { createLogger } from '@/src/lib/logger'
+
 import { getServerEnv } from './server'
 
 declare global {
@@ -34,13 +36,14 @@ export function getRuntimeConfiguration(): RuntimeConfiguration {
 
 export function reportRuntimeConfiguration() {
   const runtimeConfiguration = getRuntimeConfiguration()
+  const logger = createLogger({ scope: 'startup' })
 
   if (globalThis.__englishPlatformRuntimeLogged) {
     return runtimeConfiguration
   }
 
   if (runtimeConfiguration.logLevel === 'debug') {
-    console.debug('[startup] runtime configuration validated', {
+    logger.debug('runtime configuration validated', {
       logLevel: runtimeConfiguration.logLevel,
       nodeEnv: runtimeConfiguration.nodeEnv,
       supabaseConfigured: runtimeConfiguration.supabaseConfigured,
@@ -48,7 +51,7 @@ export function reportRuntimeConfiguration() {
   }
 
   if (runtimeConfiguration.logLevel === 'info') {
-    console.info('[startup] runtime configuration validated', {
+    logger.info('runtime configuration validated', {
       logLevel: runtimeConfiguration.logLevel,
       nodeEnv: runtimeConfiguration.nodeEnv,
       supabaseConfigured: runtimeConfiguration.supabaseConfigured,

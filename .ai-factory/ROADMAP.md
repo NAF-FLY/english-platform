@@ -7,7 +7,7 @@
 ## Milestones
 
 - [x] **Product and architecture baseline** — define product scope, core modules, stack, and implementation constraints for the first delivery phase
-- [ ] **Application foundation** — scaffold the Next.js App Router project, shared layout, environment validation, and base technical conventions
+- [x] **Application foundation** — scaffold the Next.js App Router project, shared layout, environment validation, and base technical conventions
 - [ ] **Supabase platform and schema** — set up self-hosted Supabase, initial SQL migrations, seed data, and Row Level Security foundations
 - [ ] **Authentication and protected cabinet** — implement sign up, sign in, session handling, route protection, and the initial personal cabinet shell
 - [ ] **Curriculum and lesson content model** — define how Polyglot 16 units, lessons, explanations, and exercise payloads are stored and seeded for the first release
@@ -23,3 +23,4 @@
 | Milestone | Date |
 |-----------|------|
 | Product and architecture baseline | 2026-03-12 |
+| Application foundation | 2026-03-12 |

@@ -1,0 +1,26 @@
+:root {
+  color-scheme: light;
+  --font-sans: var(--font-body), 'Segoe UI', sans-serif;
+  --font-display: var(--font-heading), 'Segoe UI', sans-serif;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-accent: #9381ff;
+  --color-accent-strong: #7c6cff;
+  --color-accent-soft: #ede9fe;
+  --color-sky: #8ecae6;
+  --color-success: #0f9d7a;
+  --color-warning: #f59e0b;
+  --color-border: rgba(148, 163, 184, 0.28);
+  --color-border-strong: rgba(148, 163, 184, 0.46);
+  --surface-page: #f8fafc;
+  --surface-base: rgba(255, 255, 255, 0.88);
+  --surface-raised: rgba(255, 255, 255, 0.96);
+  --surface-tinted: rgba(238, 242, 255, 0.9);
+  --surface-contrast: linear-gradient(135deg, #9381ff 0%, #7c6cff 100%);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 20px 48px rgba(15, 23, 42, 0.08);
+  --shadow-strong: 0 26px 70px rgba(15, 23, 42, 0.12);
+}
