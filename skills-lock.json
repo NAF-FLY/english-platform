@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "nextjs-app-router-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "d2f0a7065f7418fdb3ae88559f1f1426f40c26f2b5aebcd394797418d4bb3b04"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "computedHash": "9c87c315aed143ee3b34bec8117100f5035e0df09e6b23e1ecc772cff434c9ad"
+    }
+  }
+}

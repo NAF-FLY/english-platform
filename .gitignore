@@ -1,0 +1,28 @@
+# AI tooling bundles and local agent artifacts
+.agent/
+.agents/
+.codex/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+
+# Logs and coverage
+*.log
+coverage/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
