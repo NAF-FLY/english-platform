@@ -1,0 +1,26 @@
+:root {
+  color-scheme: light;
+  font-family:
+    "IBM Plex Sans", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #f7e8cd 0, #f3efe5 38%, #e6ebef 100%);
+  color: #1b2530;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}

@@ -25,15 +25,15 @@ Rationale: This plan covers the initial Next.js project scaffold, shared technic
 ## Tasks
 
 ### Phase 1: Bootstrap
-- [ ] Task 1: Scaffold the Next.js TypeScript application with App Router, baseline scripts, and the initial dependency set required for the architecture.
+- [x] Task 1: Scaffold the Next.js TypeScript application with App Router, baseline scripts, and the initial dependency set required for the architecture.
   Files: `package.json`, `tsconfig.json`, `next.config.*`, `app/`, `src/`
   Logging: no feature logs yet; ensure install/build/start failures surface clearly through standard tooling output and document expected startup diagnostics.
 
-- [ ] Task 2: Create the target folder structure from the architecture document so future modules have stable boundaries from day one.
+- [x] Task 2: Create the target folder structure from the architecture document so future modules have stable boundaries from day one.
   Files: `app/(public)/`, `app/(auth)/`, `app/(cabinet)/`, `src/modules/`, `src/lib/`, `src/shared/`, `src/server/`, `supabase/`
   Logging: add only setup-level comments or diagnostics where bootstrapping could fail; avoid noisy runtime logs for static structure work.
 
-- [ ] Task 3: Add environment parsing and validation for application-level configuration, including `LOG_LEVEL` and placeholders for future Supabase integration.
+- [x] Task 3: Add environment parsing and validation for application-level configuration, including `LOG_LEVEL` and placeholders for future Supabase integration.
   Files: `src/lib/env/*`, `.env.example`, startup wiring files
   Logging: log validated runtime mode and active log level in DEBUG/INFO without leaking secrets; fail fast with structured startup errors when required variables are missing.
 
