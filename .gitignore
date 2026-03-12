@@ -1,5 +1,8 @@
 .next
 node_modules
+.agent
+.agents
+.codex
 dist
 coverage
 .env
