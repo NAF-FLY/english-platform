@@ -1,3 +1,6 @@
+import type { Route } from 'next'
+
+import { getCurrentProfileReadModel } from '@/src/modules/profile/application'
 import { runServerBoundary } from '@/src/server/guards/run-server-boundary'
 import { Badge } from '@/src/shared/ui/badge'
 import { ButtonLink } from '@/src/shared/ui/button-link'
@@ -68,31 +71,55 @@ const weeklySnapshot = [
   },
 ] as const
 
+export const dynamic = 'force-dynamic'
+
 export default async function LandingPage() {
   return runServerBoundary({
     boundary: 'public:landing',
     async operation() {
+      const profile = await getCurrentProfileReadModel()
+      const primaryCta = profile
+        ? { href: '/cabinet' as Route, label: 'Продолжить в кабинете', variant: 'primary' as const }
+        : { href: '/sign-up' as Route, label: 'Начать с регистрации', variant: 'primary' as const }
+      const secondaryCta = profile
+        ? { href: '/cabinet#progress' as Route, label: 'Открыть прогресс', variant: 'secondary' as const }
+        : { href: '/sign-in' as Route, label: 'Войти', variant: 'secondary' as const }
+      const heroBadge = profile ? 'Сессия уже активна' : 'Polyglot 16'
+      const heroDescription = profile
+        ? `${profile.displayName}, ваш профиль уже распознан на сервере. Публичная зона теперь выступает точкой возврата в кабинет, а не повторным барьером авторизации.`
+        : 'English Platform использует общий визуальный язык для первого контакта, авторизации и кабинета, чтобы путь ученика выглядел как цельная система: от обещания результата до следующего урока, повторения и личного прогресса.'
+      const readinessItems = profile
+        ? [
+          {
+            description: `Активная сессия для ${profile.displayName} уже уводит основной CTA прямо в кабинет.`,
+            label: 'Возврат',
+          },
+          {
+            description: `Роли ${profile.roleSummary.toLowerCase()} распознаны до рендера и готовы управлять защищенной навигацией.`,
+            label: 'Роли',
+          },
+          readinessSignals[2],
+        ]
+        : readinessSignals
+
       return (
         <div className="stack-lg">
           <Surface className="hero-grid" variant="raised">
             <div className="stack-md">
-              <Badge tone="accent">Polyglot 16</Badge>
+              <Badge tone={profile ? 'success' : 'accent'}>{heroBadge}</Badge>
               <p className="eyebrow">Платформа с единым маршрутом для уроков, практики и личного кабинета</p>
               <h1 className="page-title">
-                Английский собирается в устойчивый учебный ритм, а не в набор случайных экранов.
+                {profile
+                  ? 'Возврат в учебный ритм начинается с правильного следующего шага, а не с повторного входа.'
+                  : 'Английский собирается в устойчивый учебный ритм, а не в набор случайных экранов.'}
               </h1>
-              <p className="lead">
-                English Platform использует общий визуальный язык для первого
-                контакта, авторизации и кабинета, чтобы путь ученика выглядел
-                как цельная система: от обещания результата до следующего
-                урока, повторения и личного прогресса.
-              </p>
+              <p className="lead">{heroDescription}</p>
               <div className="action-row">
-                <ButtonLink href="/sign-up" variant="primary">
-                  Начать с регистрации
+                <ButtonLink href={primaryCta.href} variant={primaryCta.variant}>
+                  {primaryCta.label}
                 </ButtonLink>
-                <ButtonLink href="/cabinet" variant="secondary">
-                  Посмотреть кабинет
+                <ButtonLink href={secondaryCta.href} variant={secondaryCta.variant}>
+                  {secondaryCta.label}
                 </ButtonLink>
               </div>
               <FeatureList items={learningPillars} />
@@ -179,7 +206,7 @@ export default async function LandingPage() {
                 eyebrow="Готовность"
                 title="Что уже можно развивать дальше"
               />
-              <DetailList items={readinessSignals} />
+              <DetailList items={readinessItems} />
             </Surface>
           </section>
 

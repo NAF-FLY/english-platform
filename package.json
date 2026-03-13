@@ -10,6 +10,7 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "verify": "node scripts/verify.mjs",
+    "verify:auth": "node scripts/verify.mjs --supabase --auth-only",
     "verify:supabase": "node scripts/verify.mjs --supabase",
     "supabase:start": "pnpm exec supabase start --yes --exclude realtime,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor",
     "supabase:stop": "pnpm exec supabase stop --yes",

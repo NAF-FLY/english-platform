@@ -15,6 +15,8 @@ type WorkspaceShellProps = {
   note: string
   subtitle: string
   title: string
+  userActions?: ReactNode
+  userEmail?: string | null
   userName: string
   userRole: string
 }
@@ -25,6 +27,8 @@ export function WorkspaceShell({
   note,
   subtitle,
   title,
+  userActions,
+  userEmail = null,
   userName,
   userRole,
 }: WorkspaceShellProps) {
@@ -60,6 +64,10 @@ export function WorkspaceShell({
         <div className="workspace-user">
           <p className="workspace-user__name">{userName}</p>
           <p className="workspace-user__meta">{userRole}</p>
+          {userEmail ? <p className="workspace-user__meta">{userEmail}</p> : null}
+          {userActions ? (
+            <div className="workspace-user__actions">{userActions}</div>
+          ) : null}
         </div>
 
         <p className="workspace-note">{note}</p>

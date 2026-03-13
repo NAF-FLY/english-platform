@@ -74,28 +74,28 @@ Rationale: This plan turns the current Supabase-ready UI shells and request acce
   Logging: none beyond existing server-boundary wrappers; UI-state changes should not add per-render or per-interaction log noise.
 
 ### Phase 3: Protected Cabinet Shell
-- [ ] Task 9: Create a minimal server-side cabinet or profile read model that resolves the authenticated learner's display identity, role flags, and header-level cabinet data through module code instead of hardcoded page copy, without pulling lesson or progress aggregation into this milestone.
+- [x] Task 9: Create a minimal server-side cabinet or profile read model that resolves the authenticated learner's display identity, role flags, and header-level cabinet data through module code instead of hardcoded page copy, without pulling lesson or progress aggregation into this milestone.
   Files: `src/modules/profile/application/*`, `src/modules/profile/infrastructure/*`, or `src/modules/auth/application/*` if the read model stays auth-scoped; `src/server/guards/get-request-access-snapshot.ts`
   Depends on: Task 2, Task 3
   Logging: profile-read failures should be logged once at the read-model boundary with operation and table context, never with raw auth payloads.
 
-- [ ] Task 10: Convert the `(cabinet)` layout and `/cabinet` page from a generic showcase shell into a protected personalized cabinet that requires a session, shows the current learner identity and role-aware navigation, and exposes a real sign-out control while preserving future lesson and progress panels as placeholders.
+- [x] Task 10: Convert the `(cabinet)` layout and `/cabinet` page from a generic showcase shell into a protected personalized cabinet that requires a session, shows the current learner identity and role-aware navigation, and exposes a real sign-out control while preserving future lesson and progress panels as placeholders.
   Files: `app/(cabinet)/layout.tsx`, `app/(cabinet)/cabinet/page.tsx`, `src/shared/ui/workspace-shell.tsx`, `src/modules/auth/ui/*`, `src/modules/profile/application/*`
   Depends on: Task 4, Task 7, Task 9
   Logging: normal protected rendering should stay quiet; unexpected cabinet-load failures should surface through the existing server boundary with auth or cabinet context only.
 
-- [ ] Task 11: Make public and auth-adjacent surfaces session-aware so returning users see the right primary CTA, authenticated users are redirected away from duplicate auth screens, and anonymous users are always funneled to sign-in before protected content.
+- [x] Task 11: Make public and auth-adjacent surfaces session-aware so returning users see the right primary CTA, authenticated users are redirected away from duplicate auth screens, and anonymous users are always funneled to sign-in before protected content.
   Files: `app/(public)/page.tsx`, `app/(public)/layout.tsx`, `app/(auth)/layout.tsx`, `src/server/guards/*`, optional shared navigation helpers
   Depends on: Task 4, Task 6, Task 10
   Logging: redirect-policy mismatches and unexpected access-snapshot failures should be logged once at the boundary; expected CTA branching should not log.
 
 ### Phase 4: Verification and Docs
-- [ ] Task 12: Add verification coverage for the auth milestone using deterministic local fixtures and seeded accounts, covering anonymous protected-route redirect, successful seeded sign-in, sign-out, callback handling, invalid or expired auth-link behavior, and cabinet access after session establishment.
+- [x] Task 12: Add verification coverage for the auth milestone using deterministic local fixtures and seeded accounts, covering anonymous protected-route redirect, successful seeded sign-in, sign-out, callback handling, invalid or expired auth-link behavior, and cabinet access after session establishment.
   Files: `scripts/verify.mjs`, `package.json`, optional lightweight auth smoke helpers
   Depends on: Task 4, Task 7, Task 10, Task 11
   Logging: verification should print concise pass or fail diagnostics and rely on runtime logs only for unexpected application-side failures.
 
-- [ ] Task 13: Document the end-to-end auth and protected cabinet workflow, including local seeded credentials, email-confirmation behavior, redirect rules, middleware expectations, and the manual plus automated verification checklist for this milestone.
+- [x] Task 13: Document the end-to-end auth and protected cabinet workflow, including local seeded credentials, email-confirmation behavior, redirect rules, middleware expectations, and the manual plus automated verification checklist for this milestone.
   Files: `README.md`, optional focused docs under `.ai-factory/` or `docs/`
   Depends on: Task 12
   Logging: document which auth events are expected at `debug` versus `info` and which failures should block progress immediately versus warn during local setup.

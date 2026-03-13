@@ -86,7 +86,7 @@ export function SignInForm({
 
         <div className="auth-checkbox-row">
           <span>После входа сессия сохранится в безопасных SSR-cookie.</span>
-          <span>Сброс пароля добавим отдельной фазой.</span>
+          <span>Если сессия уже активна, экран входа больше не откроется повторно.</span>
         </div>
 
         <AuthSubmitButton

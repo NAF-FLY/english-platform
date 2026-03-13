@@ -295,6 +295,13 @@ img {
   line-height: 1.6;
 }
 
+.workspace-user__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
 .workspace-main {
   padding: 32px 32px 56px;
 }
@@ -546,9 +553,14 @@ img {
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
+  appearance: none;
+  background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
+  cursor: pointer;
+  font: inherit;
   font-weight: 700;
+  text-decoration: none;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,

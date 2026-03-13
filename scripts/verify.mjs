@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import {
@@ -12,8 +12,10 @@ import {
   runSupabaseCommand,
   supabaseRunner,
 } from './supabase-local.mjs'
+import { verifyAuthMilestone } from './auth-smoke.mjs'
 
 const shouldVerifySupabase = process.argv.includes('--supabase')
+const shouldSkipBaselineChecks = process.argv.includes('--auth-only')
 const generatedTypesPath = join(projectRoot, 'src/lib/supabase/types.ts')
 const seededProfiles = [
   {
@@ -42,15 +44,17 @@ const checks = [
   ['build', [supabaseRunner, ['run', 'build']]],
 ]
 
-for (const [label, [command, args]] of checks) {
-  console.log(`\n[verify] running ${label}`)
+if (!shouldSkipBaselineChecks) {
+  for (const [label, [command, args]] of checks) {
+    console.log(`\n[verify] running ${label}`)
 
-  const result = runCommand(command, args, {
-    stdio: 'inherit',
-  })
+    const result = runCommand(command, args, {
+      stdio: 'inherit',
+    })
 
-  if (result.status !== 0) {
-    process.exit(result.status ?? 1)
+    if (result.status !== 0) {
+      process.exit(result.status ?? 1)
+    }
   }
 }
 
@@ -135,6 +139,10 @@ async function verifySupabase() {
 
   await verifySeedData(appEnv)
   verifyGeneratedTypes()
+  await verifyAuthMilestone({
+    appEnv,
+    appUrl: getConfiguredAppUrl(),
+  })
 
   console.log('[verify] local supabase stack is reachable and migration versions match the repository')
 }
@@ -240,4 +248,41 @@ async function fetchRestRows({ apiKey, path, projectUrl }) {
 
 function normalizeText(value) {
   return value.replace(/\r\n/g, '\n').trimEnd()
+}
+
+function getConfiguredAppUrl() {
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL
+  }
+
+  const localEnvPath = join(projectRoot, '.env.local')
+
+  if (!existsSync(localEnvPath)) {
+    return 'http://localhost:3000'
+  }
+
+  const envFile = readFileSync(localEnvPath, 'utf8')
+  const envEntries = envFile
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith('#'))
+
+  let appUrl = 'http://localhost:3000'
+
+  for (const entry of envEntries) {
+    const separatorIndex = entry.indexOf('=')
+
+    if (separatorIndex === -1) {
+      continue
+    }
+
+    const key = entry.slice(0, separatorIndex).trim()
+    const value = entry.slice(separatorIndex + 1).trim().replace(/^"(.*)"$/, '$1')
+
+    if (key === 'NEXT_PUBLIC_APP_URL' && value) {
+      appUrl = value
+    }
+  }
+
+  return appUrl
 }

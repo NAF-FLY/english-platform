@@ -1,3 +1,8 @@
+import type { Route } from 'next'
+import { redirect } from 'next/navigation'
+
+import { getCurrentProfileReadModel } from '@/src/modules/profile/application'
+import { buildSignInRedirectDestination } from '@/src/server/guards/auth-route-policy'
 import { runServerBoundary } from '@/src/server/guards/run-server-boundary'
 import { Badge } from '@/src/shared/ui/badge'
 import { ButtonLink } from '@/src/shared/ui/button-link'
@@ -7,21 +12,6 @@ import { ProgressBar } from '@/src/shared/ui/progress-bar'
 import { SectionHeading } from '@/src/shared/ui/section-heading'
 import { StatGrid } from '@/src/shared/ui/stat-grid'
 import { Surface } from '@/src/shared/ui/surface'
-
-const focusAreas = [
-  {
-    description: 'Новый урок должен открываться как основной сценарий дня, а не тонуть среди вторичных карточек.',
-    label: 'Следующий урок',
-  },
-  {
-    description: 'Метрики серии, завершения и силы навыка подаются в крупном и быстро считываемом формате.',
-    label: 'Прогресс',
-  },
-  {
-    description: 'Профиль и предпочтения позже лягут в ту же боковую навигацию без перестройки shell.',
-    label: 'Профиль',
-  },
-] as const
 
 const recentResults = [
   {
@@ -54,28 +44,77 @@ const unlockedMilestones = [
   { icon: 'B2', meta: 'Траектория уже ведёт к верхнему intermediate', title: 'Курс в фокусе' },
 ] as const
 
+export const dynamic = 'force-dynamic'
+
 export default async function CabinetPage() {
   return runServerBoundary({
     boundary: 'cabinet:home',
     async operation() {
+      const profile = await getCurrentProfileReadModel()
+
+      if (!profile) {
+        redirect(asRoute(buildSignInRedirectDestination('/cabinet')))
+      }
+
+      const focusAreas = [
+        {
+          description: `Следующий учебный модуль будет открываться как основной сценарий для ${profile.displayName}, а не теряться среди вторичных карточек.`,
+          label: 'Следующий урок',
+        },
+        {
+          description: `Статусы ${profile.roleSummary.toLowerCase()} уже распознаны на сервере и готовы дополняться живыми показателями серии и прохождения.`,
+          label: 'Прогресс',
+        },
+        {
+          description: profile.username
+            ? `Профиль @${profile.username} и персональные настройки сохранятся в той же боковой навигации без перестройки shell.`
+            : 'Профиль и персональные настройки позже лягут в ту же боковую навигацию без перестройки shell.',
+          label: 'Профиль',
+        },
+      ] as const
+
+      const internalSignals = profile.isInternal
+        ? [
+          {
+            description: 'Роль распознана по membership-таблице и уже может открывать внутренние read-model без второго аккаунта.',
+            label: 'Ролевой доступ',
+          },
+          {
+            description: profile.isAdmin
+              ? 'Администраторский уровень можно позже нарастить до moderation и platform settings.'
+              : 'Командный уровень можно позже нарастить до review и learner support.',
+            label: profile.isAdmin ? 'Админ-контур' : 'Командный контур',
+          },
+          {
+            description: 'Внутренние панели пока остаются placeholder-блоками, чтобы auth milestone не тянул лишнюю доменную логику.',
+            label: 'Граница milestone',
+          },
+        ] as const
+        : null
+
       return (
         <div className="stack-lg">
           <header className="workspace-header">
             <div className="workspace-header__copy">
-              <Badge tone="accent">Панель ученика</Badge>
-              <h1 className="workspace-header__title">Сегодня маршрут уже виден как настоящий кабинет.</h1>
+              <Badge tone={profile.isInternal ? 'success' : 'accent'}>
+                {profile.isInternal ? 'Защищенная сессия активна' : 'Кабинет ученика'}
+              </Badge>
+              <h1 className="workspace-header__title">
+                {profile.displayName}, ваш кабинет уже работает от реальной сессии.
+              </h1>
               <p className="workspace-header__description">
-                Дашборд следует структуре одобренного референса: боковая
-                навигация, обзор текущего курса, крупная серия занятий и
-                отдельные панели прогресса, готовые к данным из будущих модулей.
+                Серверный shell подтверждает личность, профиль и роли до
+                рендера интерфейса. Дальше на эту же защищенную основу можно
+                без дублирования auth-логики подключать уроки, прогресс и
+                внутренние панели.
               </p>
             </div>
             <div className="action-row">
+              <ButtonLink href="/cabinet#lessons" variant="primary">
+                Продолжить маршрут
+              </ButtonLink>
               <ButtonLink href="/" variant="secondary">
                 На лендинг
-              </ButtonLink>
-              <ButtonLink href="/sign-in" variant="ghost">
-                Перейти ко входу
               </ButtonLink>
             </div>
           </header>
@@ -83,11 +122,11 @@ export default async function CabinetPage() {
           <section className="dashboard-grid">
             <Surface className="stack-md" variant="raised">
               <div className="stack-md">
-                <Badge tone="muted">Текущий курс</Badge>
+                <Badge tone="muted">Текущий профиль</Badge>
                 <SectionHeading
-                  description="Здесь позже будет подключён реальный read-model курса. Сейчас блок уже задаёт правильный масштаб и иерархию для ежедневного возвращения пользователя."
-                  eyebrow="English for Business"
-                  title="Следующий шаг: переговоры и реакция в рабочем диалоге"
+                  description="Read model уже отдает display name, email и role flags. Уроки и прогресс остаются следующими интеграциями, а не хардкодом auth-фазы."
+                  eyebrow={profile.username ? `@${profile.username}` : profile.roleSummary}
+                  title={`Следующий шаг для ${profile.displayName}: уроки, прогресс и профиль в одном потоке`}
                 />
                 <div className="action-row">
                   <ButtonLink href="/cabinet#lessons" variant="primary">
@@ -105,28 +144,30 @@ export default async function CabinetPage() {
                 />
               </div>
 
-              <StatGrid
-                items={[
-                  {
-                    label: 'Следующий урок',
-                    meta: 'Словарь и реакция в деловых диалогах',
-                    tone: 'accent',
-                    value: 'Урок 06',
-                  },
-                  {
-                    label: 'Серия',
-                    meta: 'До недельной цели осталось 2 дня',
-                    tone: 'success',
-                    value: '12 дней',
-                  },
-                  {
-                    label: 'Фокус недели',
-                    meta: 'Повторение + живой разговорный блок',
-                    tone: 'cool',
-                    value: 'B1 → B2',
-                  },
-                ]}
-              />
+                <StatGrid
+                  items={[
+                    {
+                      label: 'Профиль',
+                      meta: profile.email ?? 'Email будет доступен после подтверждения.',
+                      tone: 'accent',
+                      value: profile.displayName,
+                    },
+                    {
+                      label: 'Роль',
+                      meta: 'Роли считаются на сервере и уже влияют на навигацию.',
+                      tone: 'success',
+                      value: profile.roleLabel,
+                    },
+                    {
+                      label: 'Доступ',
+                      meta: profile.isInternal
+                        ? 'Внутренний раздел появится в этой же оболочке.'
+                        : 'Пока открыт только ученический контур.',
+                      tone: 'cool',
+                      value: profile.roleSummary,
+                    },
+                  ]}
+                />
             </Surface>
 
             <Surface className="stack-md" variant="accent">
@@ -163,9 +204,9 @@ export default async function CabinetPage() {
 
             <Surface variant="cool">
               <SectionHeading
-                description="Недавние результаты оформлены через общий progress-примитив, который потом можно использовать и в упражнениях, и в профиле."
-                eyebrow="Последние результаты"
-                title="Срез по недавним блокам"
+                description="Панель остается placeholder-слоем, но теперь уже находится внутри реально защищенного кабинета, а не на декоративном макете."
+                eyebrow="Следующие данные"
+                title="Срез по будущим метрикам"
               />
               <div className="progress-stack">
                 {recentResults.map((item) => (
@@ -184,9 +225,31 @@ export default async function CabinetPage() {
 
           <Surface id="profile">
             <SectionHeading
-              description="Даже без реального профиля экран уже поддерживает блоки достижений и статусов без отдельной одноразовой вёрстки."
-              eyebrow="Вехи"
-              title="Разблокированные учебные сигналы"
+              description="Личный блок уже использует реальные поля идентичности, а достижения остаются безопасными заглушками до отдельных progress-модулей."
+              eyebrow="Идентичность"
+              title={`Профиль ${profile.displayName} уже читается с сервера`}
+            />
+            <StatGrid
+              items={[
+                {
+                  label: 'User ID',
+                  meta: 'Серверный идентификатор активной сессии.',
+                  tone: 'default',
+                  value: profile.userId.slice(0, 8),
+                },
+                {
+                  label: 'Username',
+                  meta: 'Поле профиля из таблицы profiles.',
+                  tone: 'cool',
+                  value: profile.username ? `@${profile.username}` : 'Не задан',
+                },
+                {
+                  label: 'Контур',
+                  meta: 'Определяется по role memberships.',
+                  tone: 'accent',
+                  value: profile.subtitle,
+                },
+              ]}
             />
             <div className="achievement-grid">
               {unlockedMilestones.map((item) => (
@@ -205,8 +268,8 @@ export default async function CabinetPage() {
             <Surface className="lesson-card">
               <h2 className="lesson-card__title">Уроки</h2>
               <p className="lesson-card__meta">
-                Маршрут уроков позже подключится к module application-слою и
-                защищённым read-models.
+                Следующий учебный маршрут подключится через module
+                application-слой и сохранит этот серверный auth-контракт.
               </p>
             </Surface>
 
@@ -221,13 +284,28 @@ export default async function CabinetPage() {
             <Surface className="lesson-card" variant="accent">
               <h2 className="lesson-card__title">Профиль и настройки</h2>
               <p className="lesson-card__meta">
-                Sidebar-shell заранее предусматривает отдельные зоны для
-                предпочтений, персонализации и статуса обучения.
+                Личный контур уже привязан к реальному `profiles` read model, а
+                дальше можно добавлять настройки и персонализацию без смены shell.
               </p>
             </Surface>
           </section>
+
+          {internalSignals ? (
+            <Surface id="internal" variant="cool">
+              <SectionHeading
+                description="Этот блок появляется только для staff/admin ролей и подтверждает, что навигация и shell уже реагируют на membership-таблицу."
+                eyebrow="Внутренний доступ"
+                title={profile.isAdmin ? 'Платформенный контур готов к развитию' : 'Командный контур уже выделен'}
+              />
+              <DetailList items={internalSignals} />
+            </Surface>
+          ) : null}
         </div>
       )
     },
   })
+}
+
+function asRoute(pathname: string): Route {
+  return pathname as Route
 }
