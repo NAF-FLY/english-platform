@@ -58,28 +58,28 @@ Rationale: This plan turns the current Supabase integration skeleton into a runn
   Logging: log type-backed client initialization failures and query contract mismatches at the shared boundary only; avoid per-query noise in module code.
 
 ### Phase 3: Security and Access Rules
-- [ ] Task 7: Enable Row Level Security on every new application-facing table and add reusable helper functions or policy conventions for authenticated-user ownership and internal-role checks.
+- [x] Task 7: Enable Row Level Security on every new application-facing table and add reusable helper functions or policy conventions for authenticated-user ownership and internal-role checks.
   Files: `supabase/migrations/*.sql`
   Depends on: Task 5
   Logging: do not add SQL-side debug logging for normal policy evaluation; rely on Postgres/Supabase errors and application boundary logs for denied or misconfigured access.
 
-- [ ] Task 8: Implement the first concrete policies for self-service profile access, restricted admin access, and service-role-only operations so the next auth milestone starts from a secure default.
+- [x] Task 8: Implement the first concrete policies for self-service profile access, restricted admin access, and service-role-only operations so the next auth milestone starts from a secure default.
   Files: `supabase/migrations/*.sql`, optional schema docs under `.ai-factory/` or `README.md`
   Depends on: Task 7
   Logging: unexpected policy failures should be captured at the app/server boundary with operation context, while normal authorization denials remain non-noisy and predictable.
 
-- [ ] Task 9: Add thin application-level integration points that consume the new schema safely without implementing full auth UX yet, such as typed connectivity checks, profile snapshot access, or schema-aware health reporting.
+- [x] Task 9: Add thin application-level integration points that consume the new schema safely without implementing full auth UX yet, such as typed connectivity checks, profile snapshot access, or schema-aware health reporting.
   Files: `app/api/health/route.ts`, `src/lib/supabase/*`, `src/server/guards/*`, optional module infrastructure helpers
   Depends on: Task 6, Task 8
   Logging: keep success-path logs minimal; enrich failure logs with boundary, operation, and table/policy context without including raw session payloads or sensitive identifiers.
 
 ### Phase 4: Seed Data and Operational Readiness
-- [ ] Task 10: Replace the placeholder seed file with deterministic development seed data that exercises the foundational schema, including at minimum representative profile/role fixtures and any minimal reference data required to validate RLS behavior locally.
+- [x] Task 10: Replace the placeholder seed file with deterministic development seed data that exercises the foundational schema, including at minimum representative profile/role fixtures and any minimal reference data required to validate RLS behavior locally.
   Files: `supabase/seed.sql`, optional supporting migration comments or helper docs
   Depends on: Task 5, Task 8
   Logging: seed execution should stay tooling-driven; document expected success/failure signals and avoid adding bespoke runtime logs for one-off data loading.
 
-- [ ] Task 11: Document and verify the full platform workflow end to end, covering local Supabase startup, migration reset, seed loading, generated type refresh, and the expected security/health checks for this milestone.
+- [x] Task 11: Document and verify the full platform workflow end to end, covering local Supabase startup, migration reset, seed loading, generated type refresh, and the expected security/health checks for this milestone.
   Files: `README.md`, optional focused docs under `.ai-factory/` or `docs/`, `package.json`, `scripts/verify.mjs`
   Depends on: Task 3, Task 6, Task 9, Task 10
   Logging: document which startup and verification messages are expected at `debug` vs `info`, and which failures should block progress immediately versus warn during local setup.

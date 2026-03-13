@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { getRuntimeConfiguration } from '@/src/lib/env'
+import { getSupabasePlatformHealth } from '@/src/server/guards/get-supabase-platform-health'
 import { runServerBoundary } from '@/src/server/guards/run-server-boundary'
 
 export const dynamic = 'force-dynamic'
@@ -8,29 +9,18 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
   return runServerBoundary({
     boundary: 'system:health',
-    operation() {
+    async operation() {
       const runtime = getRuntimeConfiguration()
-      const supabaseCheck = runtime.supabase.publicClientConfigured
-        ? runtime.supabase.adminClientConfigured
-          ? 'configured'
-          : 'missing-service-role'
-        : 'missing-public-env'
+      const supabaseHealth = await getSupabasePlatformHealth()
 
       return NextResponse.json({
         application: 'english-platform',
-        checks: {
-          app: 'ready',
-          supabase: supabaseCheck,
-        },
+        checks: supabaseHealth.checks,
         logLevel: runtime.logLevel,
         nodeEnv: runtime.nodeEnv,
-        status: runtime.supabase.adminClientConfigured ? 'ok' : 'degraded',
-        supabase: {
-          adminClientConfigured: runtime.supabase.adminClientConfigured,
-          mode: runtime.supabase.mode,
-          publicClientConfigured: runtime.supabase.publicClientConfigured,
-          urlOrigin: runtime.supabase.urlOrigin,
-        },
+        requestAccess: supabaseHealth.requestAccess,
+        status: supabaseHealth.status,
+        supabase: supabaseHealth.supabase,
         timestamp: new Date().toISOString(),
       })
     },
