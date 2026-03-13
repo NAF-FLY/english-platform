@@ -1,0 +1,5 @@
+export { exchangeCodeForSession } from './exchange-code-for-session'
+export { getAuthState } from './get-auth-state'
+export { signInWithPassword } from './sign-in-with-password'
+export { signOut } from './sign-out'
+export { signUpWithPassword } from './sign-up-with-password'

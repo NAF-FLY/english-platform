@@ -11,7 +11,24 @@ export function getClientEnv(): PublicEnv {
   const parsedEnv = publicEnvSchema.safeParse(process.env)
 
   if (!parsedEnv.success) {
-    throw new EnvValidationError('client', parsedEnv.error)
+    const error = new EnvValidationError('client', parsedEnv.error)
+
+    console.error(JSON.stringify({
+      context: {
+        issues: error.issues.map(({ path }) => path).join(','),
+        scope: 'client',
+      },
+      error: {
+        code: error.code,
+        name: error.name,
+      },
+      level: 'error',
+      message: 'environment validation failed',
+      scope: 'env',
+      timestamp: new Date().toISOString(),
+    }))
+
+    throw error
   }
 
   cachedClientEnv = parsedEnv.data

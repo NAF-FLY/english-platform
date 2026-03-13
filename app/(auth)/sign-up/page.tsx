@@ -1,4 +1,12 @@
+import type { Route } from 'next'
+
+import { submitSignUpAction } from '@/app/(auth)/actions'
+import { SignUpForm } from '@/src/modules/auth/ui/sign-up-form'
 import { runServerBoundary } from '@/src/server/guards/run-server-boundary'
+import {
+  buildAuthRouteHref,
+  sanitizeReturnToPath,
+} from '@/src/server/guards/auth-route-policy'
 import { AuthShell } from '@/src/shared/ui/auth-shell'
 import { ButtonLink } from '@/src/shared/ui/button-link'
 import { DetailList } from '@/src/shared/ui/detail-list'
@@ -8,86 +16,69 @@ import { Surface } from '@/src/shared/ui/surface'
 
 const onboardingBenefits = [
   {
-    description: 'Новый пользователь сразу попадает в понятную стартовую точку вместо пустого кабинета.',
-    title: 'Регистрация подготавливает первый учебный шаг.',
+    description: 'Регистрация не создает скрытую сессию: пользователь явно подтверждает email и понимает следующий шаг.',
+    title: 'Стартовый flow теперь честный и предсказуемый.',
   },
   {
-    description: 'Сразу после подключения Supabase сюда естественно добавятся подтверждение email и обработка просроченных ссылок.',
-    title: 'Технические сценарии уже имеют своё место в композиции.',
+    description: 'Подтверждение email, просроченные ссылки и возврат в нужный раздел уже встроены в общий маршрут.',
+    title: 'Технические сценарии не выбиваются из UX.',
   },
   {
-    description: 'Тот же набор токенов и отступов будет использоваться на профиле, настройках и защищённых формах.',
-    title: 'Экран работает как база для других form-flow страниц.',
+    description: 'Та же система состояний затем переиспользуется во входе, callback-ошибках и следующих auth-экранах.',
+    title: 'UI-контракт уже общий для всей auth-зоны.',
   },
 ] as const
 
 const onboardingDetails = [
   {
-    description: 'Имя, email и пароль собираются в короткую последовательность без отвлекающих промежуточных экранов.',
+    description: 'Имя, email и пароль отправляются в Supabase Auth, а профиль и роль ученика создаются через текущий DB-trigger.',
     label: 'Сценарий старта',
   },
   {
-    description: 'После успешной регистрации пользователь уходит в кабинет, где уже подготовлены модули уроков и прогресса.',
+    description: 'После успешной регистрации пользователь остается на странице и получает явный статус ожидания письма.',
     label: 'Куда ведёт CTA',
   },
   {
-    description: 'Ошибки подтверждения, занятый email и просроченные ссылки позже будут отображаться в том же shell.',
+    description: 'Занятый email, подтверждение и callback-ошибки уже используют один и тот же визуальный контракт сообщений.',
     label: 'Что добавится',
   },
 ] as const
 
-export default async function SignUpPage() {
+export const dynamic = 'force-dynamic'
+
+type SignUpPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+export default async function SignUpPage({
+  searchParams,
+}: SignUpPageProps) {
   return runServerBoundary({
     boundary: 'auth:sign-up',
     async operation() {
+      const resolvedSearchParams = await searchParams
+      const safeReturnTo = sanitizeReturnToPath(getSearchParam(resolvedSearchParams.returnTo))
+      const signInHref = buildAuthRouteHref('/sign-in', safeReturnTo)
+      const notice = safeReturnTo
+        ? 'После подтверждения email безопасно вернем вас туда, куда вы собирались попасть.'
+        : null
+
       return (
         <AuthShell
           badge="Первый вход"
-          description="Регистрация оформлена в той же структуре, что и вход: лаконичная шапка, карточка формы и поясняющие панели для следующей фазы интеграции."
-          footer="После подключения auth-инфраструктуры этот экран станет точкой создания аккаунта без дополнительной визуальной переработки."
+          description="Регистрация теперь сразу подключена к Supabase Auth: короткая форма, понятный статус ожидания письма и безаварийный callback-маршрут."
+          footer="После письма подтверждения система обменяет код на SSR-сессию и продолжит маршрут без ручных шагов."
           title="Создайте доступ к своему учебному маршруту"
         >
           <Surface className="stack-md" variant="raised">
-            <div className="auth-form">
-              <div className="auth-field">
-                <label htmlFor="sign-up-name">Как к вам обращаться</label>
-                <input
-                  autoComplete="name"
-                  id="sign-up-name"
-                  name="name"
-                  placeholder="Анна"
-                  type="text"
-                />
-              </div>
-
-              <div className="auth-field">
-                <label htmlFor="sign-up-email">Email</label>
-                <input
-                  autoComplete="email"
-                  id="sign-up-email"
-                  name="email"
-                  placeholder="student@example.com"
-                  type="email"
-                />
-              </div>
-
-              <div className="auth-field">
-                <label htmlFor="sign-up-password">Пароль</label>
-                <input
-                  autoComplete="new-password"
-                  id="sign-up-password"
-                  name="password"
-                  placeholder="Минимум 8 символов"
-                  type="password"
-                />
-              </div>
-            </div>
+            <SignUpForm
+              action={submitSignUpAction}
+              initialReturnTo={safeReturnTo ?? ''}
+              notice={notice}
+            />
 
             <div className="action-row">
-              <ButtonLink href="/cabinet" variant="primary">
-                Перейти в кабинет
-              </ButtonLink>
-              <ButtonLink href="/sign-in" variant="secondary">
+              <ButtonLink href={asRoute(signInHref)} variant="secondary">
                 У меня уже есть аккаунт
               </ButtonLink>
               <ButtonLink href="/" variant="ghost">
@@ -96,7 +87,7 @@ export default async function SignUpPage() {
             </div>
 
             <p className="auth-note">
-              Форма пока служит визуальным контрактом для будущего sign up-flow и не отправляет данные.
+              Сразу после регистрации кабинет не открывается: сначала требуется подтверждение email.
             </p>
           </Surface>
 
@@ -121,4 +112,16 @@ export default async function SignUpPage() {
       )
     },
   })
+}
+
+function getSearchParam(value: string | string[] | undefined): string | null {
+  if (Array.isArray(value)) {
+    return value[0] ?? null
+  }
+
+  return value ?? null
+}
+
+function asRoute(pathname: string): Route {
+  return pathname as Route
 }

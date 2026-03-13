@@ -8,8 +8,8 @@
 
 - [x] **Product and architecture baseline** — define product scope, core modules, stack, and implementation constraints for the first delivery phase
 - [x] **Application foundation** — scaffold the Next.js App Router project, shared layout, environment validation, and base technical conventions
-- [ ] **Supabase platform and schema** — set up self-hosted Supabase, initial SQL migrations, seed data, and Row Level Security foundations
-- [ ] **Authentication and protected cabinet** — implement sign up, sign in, session handling, route protection, and the initial personal cabinet shell
+- [x] **Supabase platform and schema** — set up self-hosted Supabase, initial SQL migrations, seed data, and Row Level Security foundations
+- [ ] **Authentication and protected cabinet** — implement email/password sign up and sign in, confirmation callback handling, SSR session persistence, protected cabinet routes, authenticated-user redirects away from auth screens, and the initial personalized cabinet shell with sign out
 - [ ] **Curriculum and lesson content model** — define how Polyglot 16 units, lessons, explanations, and exercise payloads are stored and seeded for the first release
 - [ ] **Lesson domain and sequencing** — model Polyglot 16 lessons, unlock rules, lesson navigation, and server-side lesson loading flows
 - [ ] **Exercise engine** — build grammar exercise types, answer validation, feedback flow, and result persistence
@@ -20,7 +20,7 @@
 
 ## Completed
 
-| Milestone | Date |
-|-----------|------|
+| Milestone                         | Date       |
+| --------------------------------- | ---------- |
 | Product and architecture baseline | 2026-03-12 |
-| Application foundation | 2026-03-12 |
+| Application foundation            | 2026-03-12 |

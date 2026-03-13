@@ -1,4 +1,12 @@
+import type { Route } from 'next'
+
+import { submitSignInAction } from '@/app/(auth)/actions'
+import { SignInForm } from '@/src/modules/auth/ui/sign-in-form'
 import { runServerBoundary } from '@/src/server/guards/run-server-boundary'
+import {
+  buildAuthRouteHref,
+  sanitizeReturnToPath,
+} from '@/src/server/guards/auth-route-policy'
 import { AuthShell } from '@/src/shared/ui/auth-shell'
 import { ButtonLink } from '@/src/shared/ui/button-link'
 import { DetailList } from '@/src/shared/ui/detail-list'
@@ -8,96 +16,70 @@ import { Surface } from '@/src/shared/ui/surface'
 
 const signInReadiness = [
   {
-    description: 'Подключение email/password и secure callback-маршрутов для Supabase Auth.',
+    description: 'Вход по email и паролю идет через server action и SSR-cookie без клиентского auth-store.',
     label: 'Следом подключается',
   },
   {
-    description: 'Переход в кабинет, если сессия уже активна и пользователь возвращается к урокам.',
+    description: 'Безопасный `returnTo` возвращает пользователя в нужный раздел после успешной авторизации.',
     label: 'Поведение после входа',
   },
   {
-    description: 'Единые сообщения об ошибках и понятные статусы без утечки технических деталей.',
+    description: 'Ошибки неподтвержденного email, неверного пароля и callback-сбоев показываются одним UX-контрактом.',
     label: 'Слой ошибок',
   },
 ] as const
 
 const signInSignals = [
   {
-    description: 'Кнопки social entry уже занимают правильное место и не потребуют визуальной перестройки после интеграции.',
-    title: 'Социальный вход встроен как равноправный сценарий.',
+    description: 'Google и Apple сохранены в интерфейсе, но честно помечены как отложенный MVP scope.',
+    title: 'Социальный вход больше не выглядит рабочим обещанием.',
   },
   {
-    description: 'Email и пароль уже оформлены как спокойная форма без агрессивных состояний и лишнего шума.',
-    title: 'Основной вход строится на минимальной когнитивной нагрузке.',
+    description: 'Форма теперь реально отправляет данные и удерживает пользователя в одном спокойном потоке.',
+    title: 'Основной вход уже рабочий, а не декоративный.',
   },
   {
-    description: 'Восстановление доступа и remember me остаются внизу формы, как в согласованном референсе.',
-    title: 'Служебные действия не ломают главный путь.',
+    description: 'Восстановление пароля остается отдельно, чтобы не размывать текущий auth milestone.',
+    title: 'Служебные сценарии остаются за границей MVP.',
   },
 ] as const
 
-export default async function SignInPage() {
+export const dynamic = 'force-dynamic'
+
+type SignInPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+export default async function SignInPage({
+  searchParams,
+}: SignInPageProps) {
   return runServerBoundary({
     boundary: 'auth:sign-in',
     async operation() {
+      const resolvedSearchParams = await searchParams
+      const safeReturnTo = sanitizeReturnToPath(getSearchParam(resolvedSearchParams.returnTo))
+      const signUpHref = buildAuthRouteHref('/sign-up', safeReturnTo)
+      const notice = resolveSignInNotice(
+        getSearchParam(resolvedSearchParams.notice),
+        safeReturnTo,
+      )
+
       return (
         <AuthShell
           badge="Возвращение в ритм"
-          description="Экран входа повторяет структуру утверждённого референса: крупный заголовок, social entry, email-форма и тихие служебные действия."
-          footer="Экран пока работает как UI-shell. Подключение Supabase Auth и обработка callback-маршрутов начнутся в следующей фазе."
+          description="Вход остается лаконичным: отложенные social entry, короткая email-форма, безопасный redirect и понятные состояния без технического шума."
+          footer="Если подтверждение email уже прошло, успешный вход сразу вернет вас к урокам или в кабинет."
           title="С возвращением к ежедневной практике"
         >
           <Surface className="stack-md" variant="raised">
-            <div className="auth-socials">
-              <button className="auth-social-button" type="button">
-                Продолжить через Google
-              </button>
-              <button className="auth-social-button" type="button">
-                Продолжить через Apple ID
-              </button>
-            </div>
-
-            <div className="auth-divider">
-              <span>или войти через email</span>
-            </div>
-
-            <form className="auth-form">
-              <div className="auth-field">
-                <label htmlFor="sign-in-email">Email</label>
-                <input
-                  autoComplete="email"
-                  id="sign-in-email"
-                  name="email"
-                  placeholder="student@example.com"
-                  type="email"
-                />
-              </div>
-
-              <div className="auth-field">
-                <label htmlFor="sign-in-password">Пароль</label>
-                <input
-                  autoComplete="current-password"
-                  id="sign-in-password"
-                  name="password"
-                  placeholder="••••••••"
-                  type="password"
-                />
-              </div>
-
-              <div className="auth-checkbox-row">
-                <label className="auth-checkbox" htmlFor="remember-session">
-                  <input defaultChecked id="remember-session" type="checkbox" />
-                  Запомнить меня
-                </label>
-                <span>Сброс пароля появится после интеграции доступа.</span>
-              </div>
-            </form>
+            <SignInForm
+              action={submitSignInAction}
+              initialReturnTo={safeReturnTo ?? ''}
+              notice={notice}
+            />
 
             <div className="action-row">
-              <ButtonLink href="/cabinet" variant="primary">
-                Открыть кабинет
-              </ButtonLink>
-              <ButtonLink href="/sign-up" variant="secondary">
+              <ButtonLink href={asRoute(signUpHref)} variant="secondary">
                 Создать аккаунт
               </ButtonLink>
               <ButtonLink href="/" variant="ghost">
@@ -106,7 +88,8 @@ export default async function SignInPage() {
             </div>
 
             <p className="auth-note">
-              Форма не отправляет данные и служит ориентиром для следующего этапа интеграции.
+              В MVP доступен только email/password. После входа маршрут защиты и middleware сами
+              доведут пользователя до кабинета.
             </p>
           </Surface>
 
@@ -131,4 +114,31 @@ export default async function SignInPage() {
       )
     },
   })
+}
+
+function getSearchParam(value: string | string[] | undefined): string | null {
+  if (Array.isArray(value)) {
+    return value[0] ?? null
+  }
+
+  return value ?? null
+}
+
+function resolveSignInNotice(
+  notice: string | null,
+  returnTo: string | null,
+): string | null {
+  if (notice === 'signed-out') {
+    return 'Сессия завершена. Можно войти снова с этого же устройства.'
+  }
+
+  if (returnTo) {
+    return 'После входа вернем вас к разделу, который вы пытались открыть.'
+  }
+
+  return null
+}
+
+function asRoute(pathname: string): Route {
+  return pathname as Route
 }

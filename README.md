@@ -51,9 +51,11 @@ English Platform is a Next.js application for learning English with the Polyglot
 
    - `NEXT_PUBLIC_APP_URL` is required now.
    - `LOG_LEVEL` controls server logging verbosity.
+   - `AUTH_CALLBACK_PATH`, `AUTH_ERROR_PATH`, and `AUTH_DEFAULT_RETURN_TO_PATH` default to `/callback`, `/auth-error`, and `/cabinet`.
+   - `AUTH_ALLOWED_REDIRECT_ORIGINS` accepts a comma-separated list of extra same-app origins allowed to round-trip auth redirects; `.env.example` includes `http://127.0.0.1:3000` for local host switching.
    - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` configure the public/browser and SSR clients.
    - `SUPABASE_SERVICE_ROLE_KEY` is backend-only and required for privileged server operations and health reporting.
-   - The checked-in `.env.example` sets the repository-local URL default and leaves auth keys blank on purpose; populate them from `pnpm supabase:env` or replace them with hosted project credentials.
+   - The checked-in `.env.example` sets the local callback and redirect contract and leaves auth keys blank on purpose; populate them from `pnpm supabase:env` or replace them with hosted project credentials.
 
 8. Start the app:
 
@@ -91,11 +93,22 @@ English Platform is a Next.js application for learning English with the Polyglot
 | --- | --- | --- |
 | `NEXT_PUBLIC_APP_URL` | yes | Canonical application URL used for metadata and runtime reporting |
 | `LOG_LEVEL` | yes | Server log verbosity: `debug`, `info`, `warn`, `error` |
+| `AUTH_CALLBACK_PATH` | no | Internal callback path used in Supabase email confirmation links; defaults to `/callback` |
+| `AUTH_ERROR_PATH` | no | Internal auth error landing path for expired or invalid links; defaults to `/auth-error` |
+| `AUTH_DEFAULT_RETURN_TO_PATH` | no | Safe fallback destination after auth and auth-route redirects; defaults to `/cabinet` |
+| `AUTH_ALLOWED_REDIRECT_ORIGINS` | no | Extra comma-separated same-app origins allowed for auth redirects and `returnTo` normalization |
 | `NEXT_PUBLIC_SUPABASE_URL` | yes for Supabase-backed work | Supabase project URL for SSR/browser clients; defaults to `http://127.0.0.1:55321` in this repository's local CLI mode |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | yes for Supabase-backed work | Public anonymous key for SSR/browser clients; use the local CLI export or hosted anon key |
 | `SUPABASE_SERVICE_ROLE_KEY` | yes for admin/server checks | Backend-only admin key for server-side privileged operations and verification flows |
 
 `SUPABASE_SERVICE_ROLE_KEY` must never be exposed to the browser. The admin client in [`src/lib/supabase/admin.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/admin.ts) is server-only and disables session persistence on purpose.
+
+## Auth Redirect Contract
+
+- Local Supabase email confirmation now assumes `supabase/config.toml` points `site_url` at `http://localhost:3000` and allows both `http://localhost:3000/callback` and `http://127.0.0.1:3000/callback`.
+- The repository defaults keep sign-up confirmation-first by enabling `auth.email.enable_confirmations = true` in local Supabase config.
+- `returnTo` is normalized to same-origin internal paths only. External origins, protocol-relative paths, and auth-loop destinations such as `/sign-in`, `/sign-up`, `/callback`, and `/auth-error` are rejected and fall back to `/cabinet`.
+- Root proxy refreshes Supabase SSR cookies on `/cabinet`, `/sign-in`, `/sign-up`, `/callback`, and `/auth-error`, redirects anonymous users away from `/cabinet`, and redirects authenticated users away from duplicate auth-entry routes.
 
 ## Local Supabase Workflow
 
@@ -136,6 +149,7 @@ Expected local startup behavior:
 
 - missing required env values should block boot with a structured validation error;
 - missing Supabase values do not block purely static/public routes until a Supabase client or admin boundary is instantiated;
+- invalid auth-path or redirect-origin env values should fail fast before auth proxy or application helpers run;
 - Supabase client creation failures are logged with safe metadata only, without keys or raw session payloads.
 
 ## Verification Checklist
@@ -145,11 +159,14 @@ Expected local startup behavior:
 3. If the database drifts, run `pnpm supabase:reset` and repeat `pnpm verify:supabase`.
 4. If you changed migrations, run `pnpm supabase:types` before repeating `pnpm verify:supabase`.
 5. Open `/`, `/sign-in`, `/sign-up`, and `/cabinet`.
-6. Call `GET /api/health` and confirm the JSON payload reflects the current runtime state.
-7. Expect `/api/health` to return `"status": "ok"` only when both public and service-role Supabase settings are present.
-8. Expect `checks.profilesTable` and `checks.roleMembershipsTable` to report `"reachable"` once the local stack is up and `.env.local` contains the live credentials from `pnpm supabase:env`.
-9. Expect `requestAccess.isAuthenticated` to remain `false` for anonymous browser requests until the next auth milestone wires real sign-in/session handling into the app.
-10. If Supabase env values are still empty, expect `/api/health` to return `"status": "degraded"` with `supabase: "missing-public-env"` or `"missing-service-role"` until the app is pointed at a real stack.
+6. Expect an anonymous request to `/cabinet` to redirect to `/sign-in?returnTo=%2Fcabinet`.
+7. Expect authenticated requests to `/sign-in` or `/sign-up` to be redirected to the validated `returnTo` path or `/cabinet`.
+8. Expect local email confirmation links to target `/callback`, not a hosted Supabase URL.
+9. Call `GET /api/health` and confirm the JSON payload reflects the current runtime state.
+10. Expect `/api/health` to return `"status": "ok"` only when both public and service-role Supabase settings are present.
+11. Expect `checks.profilesTable` and `checks.roleMembershipsTable` to report `"reachable"` once the local stack is up and `.env.local` contains the live credentials from `pnpm supabase:env`.
+12. Expect `requestAccess.isAuthenticated` to remain `false` for anonymous browser requests until sign-in actions are wired in the next phase.
+13. If Supabase env values are still empty, expect `/api/health` to return `"status": "degraded"` with `supabase: "missing-public-env"` or `"missing-service-role"` until the app is pointed at a real stack.
 
 ## Supabase Skeleton
 
@@ -157,8 +174,11 @@ The integration-ready baseline is split into dedicated files:
 
 - [`src/lib/supabase/browser.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/browser.ts) for browser usage
 - [`src/lib/supabase/server.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/server.ts) for Server Components and route handlers
-- [`src/lib/supabase/middleware.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/middleware.ts) for future session refresh middleware
+- [`src/lib/supabase/middleware.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/middleware.ts) for SSR session refresh helpers used by the root proxy
 - [`src/lib/supabase/admin.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/admin.ts) for privileged backend-only operations
-- [`src/modules/auth/infrastructure/supabase-auth-adapter.ts`](/home/mrazcore/Projects/english-platform/src/modules/auth/infrastructure/supabase-auth-adapter.ts) as the first auth-facing adapter
+- [`src/modules/auth/application/index.ts`](/home/mrazcore/Projects/english-platform/src/modules/auth/application/index.ts) for stable auth application operations
+- [`src/modules/auth/infrastructure/supabase-auth-adapter.ts`](/home/mrazcore/Projects/english-platform/src/modules/auth/infrastructure/supabase-auth-adapter.ts) as the Supabase auth adapter
+- [`src/server/guards/auth-route-policy.ts`](/home/mrazcore/Projects/english-platform/src/server/guards/auth-route-policy.ts) for route classification and safe `returnTo` handling
+- [`proxy.ts`](/home/mrazcore/Projects/english-platform/proxy.ts) for route-level session refresh and redirect enforcement
 
-These files intentionally stop at infrastructure boundaries. They do not include schema queries, route protection policy, or user-facing auth flows yet.
+These files now cover the auth platform contract and middleware boundaries. User-facing form actions, callback routes, and cabinet personalization still land in the next phases.

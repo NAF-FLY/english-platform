@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { createLogger } from '@/src/lib/logger'
+import { isSupabaseMissingSessionError } from '@/src/modules/auth/infrastructure/supabase-auth-error'
 import {
   createServerSupabaseClient,
   getProfileSnapshot,
@@ -32,7 +33,7 @@ export async function getRequestAccessSnapshot(): Promise<RequestAccessSnapshot>
     const { data, error } = await supabase.auth.getUser()
 
     if (error) {
-      if (isMissingAuthSessionError(error)) {
+      if (isSupabaseMissingSessionError(error)) {
         return createAnonymousAccessSnapshot()
       }
 
@@ -95,22 +96,4 @@ function createAnonymousAccessSnapshot(): RequestAccessSnapshot {
     isInternal: false,
     user: null,
   }
-}
-
-function isMissingAuthSessionError(error: unknown): boolean {
-  if (!(error instanceof Error)) {
-    return false
-  }
-
-  const candidate = error as Error & {
-    __isAuthError?: boolean
-    status?: number
-  }
-
-  return (
-    candidate.__isAuthError === true
-    && candidate.name === 'AuthSessionMissingError'
-    && candidate.message === 'Auth session missing!'
-    && candidate.status === 400
-  )
 }

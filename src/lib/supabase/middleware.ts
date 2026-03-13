@@ -1,10 +1,9 @@
-import 'server-only'
-
 import { createServerClient } from '@supabase/ssr'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 import { createLogger } from '@/src/lib/logger'
+import { isSupabaseMissingSessionError } from '@/src/modules/auth/infrastructure/supabase-auth-error'
 import { AppError } from '@/src/shared/types'
 
 import { getSupabasePublicConfig } from './config'
@@ -12,46 +11,88 @@ import type { Database } from './types'
 
 const logger = createLogger({ scope: 'supabase-middleware' })
 
-type MiddlewareSupabaseClientOptions = {
-  request: NextRequest
-  response?: NextResponse
+type ProxySessionSnapshot = {
+  isAuthenticated: boolean
+  response: NextResponse
 }
 
-export function createMiddlewareSupabaseClient({
-  request,
-  response = NextResponse.next({
+export async function refreshProxySession(
+  request: NextRequest,
+): Promise<ProxySessionSnapshot> {
+  let response = NextResponse.next({
     request,
-  }),
-}: MiddlewareSupabaseClientOptions) {
+  })
+
   try {
     const { anonKey, url } = getSupabasePublicConfig()
-
     const supabase = createServerClient<Database>(url, anonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, options, value }) => {
+          cookiesToSet.forEach(({ name, value }) => {
             request.cookies.set(name, value)
+          })
+
+          response = NextResponse.next({
+            request,
+          })
+
+          cookiesToSet.forEach(({ name, options, value }) => {
             response.cookies.set(name, value, options)
           })
         },
       },
     })
 
-    return { response, supabase }
-  } catch (error) {
-    logger.error('failed to create supabase middleware client', { target: 'middleware-client' }, error)
+    const { data, error } = await supabase.auth.getUser()
 
+    if (error) {
+      if (isSupabaseMissingSessionError(error)) {
+        return {
+          isAuthenticated: false,
+          response,
+        }
+      }
+
+      logger.error('proxy session refresh failed', {
+        boundary: 'auth',
+        operation: 'proxy.auth.getUser',
+        path: request.nextUrl.pathname,
+      }, error)
+
+      throw new AppError('UNEXPECTED', 'Failed to refresh Supabase session in proxy.', {
+        cause: error,
+        context: {
+          boundary: 'auth',
+          operation: 'proxy.auth.getUser',
+          path: request.nextUrl.pathname,
+        },
+      })
+    }
+
+    return {
+      isAuthenticated: Boolean(data.user),
+      response,
+    }
+  } catch (error) {
     if (error instanceof AppError) {
       throw error
     }
 
-    throw new AppError('UNEXPECTED', 'Failed to create Supabase middleware client.', {
+    logger.error('proxy session refresh failed', {
+      boundary: 'auth',
+      operation: 'proxy.auth.getUser',
+      path: request.nextUrl.pathname,
+    }, error)
+
+    throw new AppError('UNEXPECTED', 'Failed to refresh Supabase session in proxy.', {
       cause: error,
       context: {
-        target: 'middleware-client',
+        boundary: 'auth',
+        operation: 'proxy.auth.getUser',
+        path: request.nextUrl.pathname,
       },
     })
   }
