@@ -23,19 +23,39 @@ English Platform is a Next.js application for learning English with the Polyglot
    cp .env.example .env.local
    ```
 
-3. Fill in the required variables:
+3. Install and start the local Supabase stack:
+
+   ```bash
+   pnpm supabase:start
+   ```
+
+4. Print the live local Supabase credentials and confirm `.env.local` matches them:
+
+   ```bash
+   pnpm supabase:env
+   ```
+
+5. Reset the local database to the checked-in schema state:
+
+   ```bash
+   pnpm supabase:reset
+   ```
+
+6. Fill in the required variables:
 
    - `NEXT_PUBLIC_APP_URL` is required now.
    - `LOG_LEVEL` controls server logging verbosity.
-   - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` stay optional until the auth/data milestone, but the new Supabase skeleton will fail fast if you try to instantiate clients without them.
+   - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` configure the public/browser and SSR clients.
+   - `SUPABASE_SERVICE_ROLE_KEY` is backend-only and required for privileged server operations and health reporting.
+   - The checked-in `.env.example` sets the repository-local URL default and leaves auth keys blank on purpose; populate them from `pnpm supabase:env` or replace them with hosted project credentials.
 
-4. Start the app:
+7. Start the app:
 
    ```bash
    pnpm dev
    ```
 
-5. Open `http://localhost:3000`.
+8. Open `http://localhost:3000`.
 
 ## Scripts
 
@@ -44,6 +64,13 @@ English Platform is a Next.js application for learning English with the Polyglot
 - `pnpm typecheck` runs TypeScript in no-emit mode.
 - `pnpm build` builds the production bundle.
 - `pnpm verify` runs `lint`, `typecheck`, and `build` sequentially for baseline verification.
+- `pnpm verify:supabase` runs the baseline checks plus local Supabase status, schema linting, and migration-state verification.
+- `pnpm supabase:start` starts the local Supabase stack with only the services needed for the current milestone.
+- `pnpm supabase:stop` stops the local Supabase stack.
+- `pnpm supabase:status` shows the local Supabase container status.
+- `pnpm supabase:env` prints the app-facing local Supabase env values from the running stack.
+- `pnpm supabase:reset` resets the local database and reapplies checked-in migrations plus `supabase/seed.sql`.
+- `pnpm supabase:lint` runs `supabase db lint --local` against the running local database.
 
 ## Environment Variables
 
@@ -51,11 +78,20 @@ English Platform is a Next.js application for learning English with the Polyglot
 | --- | --- | --- |
 | `NEXT_PUBLIC_APP_URL` | yes | Canonical application URL used for metadata and runtime reporting |
 | `LOG_LEVEL` | yes | Server log verbosity: `debug`, `info`, `warn`, `error` |
-| `NEXT_PUBLIC_SUPABASE_URL` | no | Supabase project URL for SSR/browser clients |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | no | Public anonymous key for SSR/browser clients |
-| `SUPABASE_SERVICE_ROLE_KEY` | no | Backend-only admin key for server-side privileged operations |
+| `NEXT_PUBLIC_SUPABASE_URL` | yes for Supabase-backed work | Supabase project URL for SSR/browser clients; defaults to `http://127.0.0.1:55321` in this repository's local CLI mode |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | yes for Supabase-backed work | Public anonymous key for SSR/browser clients; use the local CLI export or hosted anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | yes for admin/server checks | Backend-only admin key for server-side privileged operations and verification flows |
 
 `SUPABASE_SERVICE_ROLE_KEY` must never be exposed to the browser. The admin client in [`src/lib/supabase/admin.ts`](/home/mrazcore/Projects/english-platform/src/lib/supabase/admin.ts) is server-only and disables session persistence on purpose.
+
+## Local Supabase Workflow
+
+1. `pnpm supabase:start` boots a deterministic local stack for this milestone.
+2. `pnpm supabase:env` prints the exact app env values exported by the running stack.
+3. `pnpm supabase:reset` reapplies checked-in migrations and `supabase/seed.sql`.
+4. `pnpm verify:supabase` confirms the local stack is running, the database is reachable, `supabase db lint` passes, and applied migration versions match the repository.
+
+The start command intentionally excludes heavy services that this milestone does not need yet: realtime, storage, edge functions, logflare, vector, and supavisor. Re-enable them later when the product actually depends on those capabilities.
 
 ## Logging
 
@@ -67,15 +103,18 @@ English Platform is a Next.js application for learning English with the Polyglot
 Expected local startup behavior:
 
 - missing required env values should block boot with a structured validation error;
-- missing optional Supabase values do not block the app until a Supabase client is instantiated;
+- missing Supabase values do not block purely static/public routes until a Supabase client or admin boundary is instantiated;
 - Supabase client creation failures are logged with safe metadata only, without keys or raw session payloads.
 
 ## Verification Checklist
 
 1. Run `pnpm verify`.
-2. Open `/`, `/sign-in`, `/sign-up`, and `/cabinet`.
-3. Call `GET /api/health` and confirm the JSON payload reflects the current runtime state.
-4. If Supabase env values are still empty, expect `/api/health` to return `"status": "degraded"` with `supabase: "missing-env"` until the next milestone wires the real backend.
+2. Run `pnpm verify:supabase` after `pnpm supabase:start`.
+3. If the database drifts, run `pnpm supabase:reset` and repeat `pnpm verify:supabase`.
+4. Open `/`, `/sign-in`, `/sign-up`, and `/cabinet`.
+5. Call `GET /api/health` and confirm the JSON payload reflects the current runtime state.
+6. Expect `/api/health` to return `"status": "ok"` only when both public and service-role Supabase settings are present.
+7. If Supabase env values are still empty, expect `/api/health` to return `"status": "degraded"` with `supabase: "missing-public-env"` or `"missing-service-role"` until the next milestone wires the real backend.
 
 ## Supabase Skeleton
 

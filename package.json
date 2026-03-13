@@ -9,7 +9,15 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "verify:supabase": "node scripts/verify.mjs --supabase",
+    "supabase:start": "pnpm exec supabase start --yes --exclude realtime,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor",
+    "supabase:stop": "pnpm exec supabase stop --yes",
+    "supabase:status": "pnpm exec supabase status",
+    "supabase:status:env": "pnpm exec supabase status -o env",
+    "supabase:env": "node scripts/print-supabase-env.mjs",
+    "supabase:reset": "pnpm exec supabase db reset --local --yes",
+    "supabase:lint": "pnpm exec supabase db lint --local"
   },
   "dependencies": {
     "@supabase/ssr": "0.9.0",
@@ -26,6 +34,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.1.6",
+    "supabase": "2.78.1",
     "typescript": "5.9.3"
   }
 }

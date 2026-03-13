@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { createLogger } from '@/src/lib/logger'
+import { getSupabaseConfigurationSnapshot } from '@/src/lib/supabase/config'
 
 import { getServerEnv } from './server'
 
@@ -12,7 +13,7 @@ export type RuntimeConfiguration = {
   appUrl: string
   logLevel: 'debug' | 'info' | 'warn' | 'error'
   nodeEnv: 'development' | 'test' | 'production'
-  supabaseConfigured: boolean
+  supabase: ReturnType<typeof getSupabaseConfigurationSnapshot>
 }
 
 export function getMetadataBase() {
@@ -26,11 +27,7 @@ export function getRuntimeConfiguration(): RuntimeConfiguration {
     appUrl: env.NEXT_PUBLIC_APP_URL,
     logLevel: env.LOG_LEVEL,
     nodeEnv: env.NODE_ENV,
-    supabaseConfigured: Boolean(
-      env.NEXT_PUBLIC_SUPABASE_URL &&
-        env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-        env.SUPABASE_SERVICE_ROLE_KEY,
-    ),
+    supabase: getSupabaseConfigurationSnapshot(),
   }
 }
 
@@ -46,7 +43,9 @@ export function reportRuntimeConfiguration() {
     logger.debug('runtime configuration validated', {
       logLevel: runtimeConfiguration.logLevel,
       nodeEnv: runtimeConfiguration.nodeEnv,
-      supabaseConfigured: runtimeConfiguration.supabaseConfigured,
+      supabaseAdminConfigured: runtimeConfiguration.supabase.adminClientConfigured,
+      supabaseMode: runtimeConfiguration.supabase.mode,
+      supabasePublicConfigured: runtimeConfiguration.supabase.publicClientConfigured,
     })
   }
 
@@ -54,7 +53,9 @@ export function reportRuntimeConfiguration() {
     logger.info('runtime configuration validated', {
       logLevel: runtimeConfiguration.logLevel,
       nodeEnv: runtimeConfiguration.nodeEnv,
-      supabaseConfigured: runtimeConfiguration.supabaseConfigured,
+      supabaseAdminConfigured: runtimeConfiguration.supabase.adminClientConfigured,
+      supabaseMode: runtimeConfiguration.supabase.mode,
+      supabasePublicConfigured: runtimeConfiguration.supabase.publicClientConfigured,
     })
   }
 
