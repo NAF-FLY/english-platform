@@ -12,7 +12,9 @@ import type { Database } from './types'
 
 const logger = createLogger({ scope: 'supabase' })
 
-export async function createServerSupabaseClient() {
+export type ServerSupabaseClient = SupabaseClient<Database>
+
+export async function createServerSupabaseClient(): Promise<ServerSupabaseClient> {
   const cookieStore = await cookies()
 
   try {
@@ -53,7 +55,5 @@ export async function createServerSupabaseClient() {
     })
   }
 }
-
-export type ServerSupabaseClient = Awaited<ReturnType<typeof createServerSupabaseClient>>
 
 export type { SupabaseClient }

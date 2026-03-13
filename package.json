@@ -17,7 +17,8 @@
     "supabase:status:env": "pnpm exec supabase status -o env",
     "supabase:env": "node scripts/print-supabase-env.mjs",
     "supabase:reset": "pnpm exec supabase db reset --local --yes",
-    "supabase:lint": "pnpm exec supabase db lint --local"
+    "supabase:lint": "pnpm exec supabase db lint --local",
+    "supabase:types": "pnpm exec supabase gen types typescript --local --schema public > src/lib/supabase/types.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.9.0",

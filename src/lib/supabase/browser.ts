@@ -8,9 +8,11 @@ import { AppError } from '@/src/shared/types'
 
 import type { Database } from './types'
 
-let browserClient: SupabaseClient<Database> | undefined
+export type BrowserSupabaseClient = SupabaseClient<Database>
 
-export function createBrowserSupabaseClient() {
+let browserClient: BrowserSupabaseClient | undefined
+
+export function createBrowserSupabaseClient(): BrowserSupabaseClient {
   if (browserClient) {
     return browserClient
   }

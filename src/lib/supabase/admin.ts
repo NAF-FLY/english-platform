@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { createClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 import { createLogger } from '@/src/lib/logger'
 import { AppError } from '@/src/shared/types'
@@ -10,7 +11,9 @@ import type { Database } from './types'
 
 const logger = createLogger({ scope: 'supabase-admin' })
 
-export function createAdminSupabaseClient() {
+export type AdminSupabaseClient = SupabaseClient<Database>
+
+export function createAdminSupabaseClient(): AdminSupabaseClient {
   try {
     const { serviceRoleKey, url } = getSupabaseAdminConfig()
 

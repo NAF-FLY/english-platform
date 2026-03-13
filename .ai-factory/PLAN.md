@@ -43,16 +43,16 @@ Rationale: This plan turns the current Supabase integration skeleton into a runn
   Logging: emit a single clear INFO/DEBUG confirmation when connectivity checks succeed in development and structured ERROR logs when schema/bootstrap checks fail unexpectedly.
 
 ### Phase 2: Initial Schema Foundation
-- [ ] Task 4: Create the first SQL migration with shared database primitives such as extensions, timestamp helpers, common trigger functions, and foundational enums or lookup structures needed across modules.
+- [x] Task 4: Create the first SQL migration with shared database primitives such as extensions, timestamp helpers, common trigger functions, and foundational enums or lookup structures needed across modules.
   Files: `supabase/migrations/*.sql`
   Logging: database functions should not create noisy audit output by default; document failure surfaces and rely on migration tooling plus app-boundary logging for diagnostics.
 
-- [ ] Task 5: Add the first application-facing tables centered on identity and access foundations, including a public profile record linked to `auth.users` and any minimal role/membership structures required for future protected areas and internal admin tooling.
+- [x] Task 5: Add the first application-facing tables centered on identity and access foundations, including a public profile record linked to `auth.users` and any minimal role/membership structures required for future protected areas and internal admin tooling.
   Files: `supabase/migrations/*.sql`
   Depends on: Task 4
   Logging: keep schema-level defaults deterministic; if any trigger-based synchronization is added, ensure failures surface as database errors rather than silent partial writes.
 
-- [ ] Task 6: Replace the placeholder Supabase database typing with generated schema types and thread those types through the shared client factories and adapters.
+- [x] Task 6: Replace the placeholder Supabase database typing with generated schema types and thread those types through the shared client factories and adapters.
   Files: `src/lib/supabase/types.ts`, `src/lib/supabase/browser.ts`, `src/lib/supabase/server.ts`, `src/lib/supabase/admin.ts`, `src/modules/auth/infrastructure/supabase-auth-adapter.ts`, `package.json`
   Depends on: Task 4, Task 5
   Logging: log type-backed client initialization failures and query contract mismatches at the shared boundary only; avoid per-query noise in module code.
